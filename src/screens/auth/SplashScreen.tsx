@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {resetNavigation} from '../../utils/commonFunction';
@@ -15,9 +15,9 @@ const SplashScreen = (props: Props) => {
   }, []);
 
   return (
-    <View>
-      <Text>SplashScreen</Text>
-    </View>
+    <SafeAreaView>
+      <Text style={{color: 'red'}}>SplashScreen</Text>
+    </SafeAreaView>
   );
 };
 
