@@ -56,6 +56,13 @@
 		<string>Gilroy-Medium.ttf</string>
 		<string>Gilroy-Regular.ttf</string>
 		<string>Gilroy-SemiBold.ttf</string>
+		<string>Inter_18pt-Black.ttf</string>
+		<string>Inter_18pt-Bold.ttf</string>
+		<string>Inter_18pt-ExtraBold.ttf</string>
+		<string>Inter_18pt-Light.ttf</string>
+		<string>Inter_18pt-Medium.ttf</string>
+		<string>Inter_18pt-Regular.ttf</string>
+		<string>Inter_18pt-SemiBold.ttf</string>
 	</array>
 </dict>
 </plist>

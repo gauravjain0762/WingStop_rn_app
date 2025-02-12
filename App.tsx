@@ -7,6 +7,8 @@ import {colors} from './src/theme/colors';
 import {hp, commonFontStyle, SCREEN_WIDTH} from './src/theme/fonts';
 import StackNavigator from './src/navigation/StackNavigator';
 import RootContainer from './src/navigation/RootContainer';
+import {I18nextProvider} from 'react-i18next';
+import i18n from './src/locales/i18n';
 
 type Props = {};
 
@@ -35,10 +37,12 @@ const App = (props: Props) => {
 
   return (
     <Provider store={store}>
-      <View style={{flex: 1}}>
-        <RootContainer />
-        <Toast config={toastConfig} position="top" topOffset={0} />
-      </View>
+      <I18nextProvider i18n={i18n}>
+        <View style={{flex: 1}}>
+          <RootContainer />
+          <Toast config={toastConfig} position="top" topOffset={0} />
+        </View>
+      </I18nextProvider>
     </Provider>
   );
 };
@@ -59,7 +63,7 @@ const styles = StyleSheet.create({
     width: SCREEN_WIDTH,
   },
   textStyleToast: {
-    ...commonFontStyle(500, 14, colors.white),
+    ...commonFontStyle('500', 14, colors.white),
     textAlign: 'center',
   },
 });

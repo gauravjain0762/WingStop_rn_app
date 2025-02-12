@@ -10,7 +10,10 @@ import notifee, {AndroidImportance, EventType} from '@notifee/react-native';
 import firebase from '@react-native-firebase/app';
 import messaging from '@react-native-firebase/messaging';
 import {SET_FCM_TOKEN} from '../redux/actionTypes';
-import SplashScreen from '../screens/auth/SplashScreen';
+import Splash from '../screens/auth/Splash';
+import GetStarted from '../screens/auth/GetStarted';
+import SignUpScreen from '../screens/auth/SignUpScreen';
+import VerificationScreen from '../screens/auth/VerificationScreen';
 
 export type RootStackParamList = {
   HomeScreen: undefined;
@@ -145,17 +148,50 @@ const StackNavigator: FC = () => {
   return (
     <Stack.Navigator initialRouteName={SCREENS.SplashScreen}>
       <Stack.Screen
-        options={({navigation}) => ({headerShown: true})}
+        options={({navigation}) => ({
+          ...headerStyleTransparent,
+          headerShown: false,
+        })}
         name={SCREENS.SplashScreen}
-        component={SplashScreen}
+        component={Splash}
       />
       <Stack.Screen
-        options={({navigation}) => ({headerShown: true})}
+        options={({navigation}) => ({
+          ...headerStyleTransparent,
+          headerShown: false,
+        })}
+        name={SCREENS.GetStarted}
+        component={GetStarted}
+      />
+      <Stack.Screen
+        options={({navigation}) => ({
+          ...headerStyleTransparent,
+          headerShown: false,
+        })}
         name={SCREENS.LoginScreen}
         component={LoginScreen}
       />
       <Stack.Screen
-        options={({navigation}) => ({headerShown: true})}
+        options={({navigation}) => ({
+          ...headerStyleTransparent,
+          headerShown: false,
+        })}
+        name={SCREENS.SignUpScreen}
+        component={SignUpScreen}
+      />
+      <Stack.Screen
+        options={({navigation}) => ({
+          ...headerStyleTransparent,
+          headerShown: false,
+        })}
+        name={SCREENS.VerificationScreen}
+        component={VerificationScreen}
+      />
+      <Stack.Screen
+        options={({navigation}) => ({
+          ...headerStyleTransparent,
+          headerShown: false,
+        })}
         name={SCREENS.HomeScreen}
         component={HomeScreen}
       />

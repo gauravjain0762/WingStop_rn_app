@@ -1,11 +1,11 @@
-import axios from "axios";
-import { asyncKeys, clearAsync, getAsyncToken } from "./asyncStorage";
-import { errorToast } from "./commonFunction";
-import { dispatchAction } from "../redux/hooks";
-import { IS_LOADING } from "../redux/actionTypes";
-import { navigationRef } from "../navigation/mainNavigator";
-import { SCREENS } from "../navigation/screenNames";
-import { API } from "./apiConstant";
+import axios from 'axios';
+import {asyncKeys, clearAsync, getAsyncToken} from './asyncStorage';
+import {errorToast} from './commonFunction';
+import {dispatchAction} from '../redux/hooks';
+import {IS_LOADING} from '../redux/actionTypes';
+import {navigationRef} from '../navigation/mainNavigator';
+import {SCREENS} from '../navigation/screenNames';
+import {API} from './apiConstant';
 
 interface makeAPIRequestProps {
   method?: any;
@@ -29,20 +29,20 @@ export const makeAPIRequest = ({
       url,
       data: data,
       headers: {
-        Accept: "application/json",
+        Accept: 'application/json',
         ...headers,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       params: params,
     };
     axios(option)
-      .then((response) => {
+      .then(response => {
         console.log(
-          "res--->",
+          'res--->',
           API.BASE_URL + url,
           data,
           params,
-          response?.data
+          response?.data,
         );
         if (response.status === 200 || response.status === 201) {
           resolve(response);
@@ -50,14 +50,14 @@ export const makeAPIRequest = ({
           reject(response);
         }
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(
-          "err--->",
+          'err--->',
           API.BASE_URL + url,
           data,
           params,
           error,
-          error?.response?.status
+          error?.response?.status,
         );
         reject(error);
       });
@@ -65,10 +65,10 @@ export const makeAPIRequest = ({
 
 export const setAuthorization = async (authToken: any) => {
   const token = await getAsyncToken();
-  if (authToken == "") {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  if (authToken == '') {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   } else {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${authToken}`;
+    axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
   }
 };
 
@@ -81,7 +81,7 @@ export const handleSuccessRes = (
   res: any,
   request: any,
   dispatch: any,
-  fun?: () => void
+  fun?: () => void,
 ) => {
   if (res?.status === 200 || res?.status === 201) {
     dispatchAction(dispatch, IS_LOADING, false);
@@ -99,16 +99,16 @@ export const handleErrorRes = (
   err: any,
   request: any,
   dispatch: any,
-  fun?: () => void
+  fun?: () => void,
 ) => {
   if (err?.response?.status == 401) {
     dispatchAction(dispatch, IS_LOADING, false);
     removeAuthorization();
-    navigationRef.reset({
-      index: 0,
-      routes: [{ name: SCREENS.LoginScreen }],
-    });
-    errorToast("Please login again");
+    // navigationRef.reset({
+    //   index: 0,
+    //   routes: [{ name: SCREENS.LoginScreen }],
+    // });
+    errorToast('Please login again');
   } else {
     dispatchAction(dispatch, IS_LOADING, false);
     if (err?.response?.data?.errors) {
@@ -120,7 +120,7 @@ export const handleErrorRes = (
     } else if (err?.message) {
       errorToast(err?.message);
     } else {
-      errorToast("Something went wrong! Please try again");
+      errorToast('Something went wrong! Please try again');
     }
     if (fun) fun();
     if (request?.onFailure) request?.onFailure(err?.response);

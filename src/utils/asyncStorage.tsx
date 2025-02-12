@@ -1,9 +1,10 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const asyncKeys = {
   // clear in logout time
-  token: "@token",
-  user_info: "@user_info",
+  token: '@token',
+  user_info: '@user_info',
+  language: '@language',
 };
 
 export const clearAsync = async () => {
@@ -33,5 +34,20 @@ export const getAsyncUserInfo = async () => {
     return JSON.parse(userInfo);
   } else {
     return null;
+  }
+};
+
+// LANGUAGE
+
+export const setAsyncLanguage = async value => {
+  await AsyncStorage.setItem(asyncKeys.language, JSON.stringify(value));
+};
+
+export const getAsyncLanguage = async () => {
+  const value = await AsyncStorage.getItem(asyncKeys.language);
+  if (value) {
+    return JSON.parse(value);
+  } else {
+    return 'en';
   }
 };

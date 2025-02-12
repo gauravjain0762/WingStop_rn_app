@@ -32,15 +32,15 @@ const RootContainer: FC = () => {
   const theme = useColorScheme();
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(setDarkTheme(theme == 'dark' ? true : false));
-  }, [theme]);
+  // useEffect(() => {
+  //   dispatch(setDarkTheme(theme == 'dark' ? true : false));
+  // }, [theme]);
 
   return (
     <NavigationContainer
-      theme={isDarkTheme ? DarkThemeColors : DefaultThemeColor}
+      // theme={isDarkTheme ? DarkThemeColors : DefaultThemeColor}
       ref={navigationRef}>
-      <StatusBar barStyle={'dark-content'} backgroundColor={colors.white} />
+      <StatusBar barStyle={'dark-content'} backgroundColor={colors.bgColor} />
       <StackNavigator />
       {isLoading && <Loader />}
     </NavigationContainer>
