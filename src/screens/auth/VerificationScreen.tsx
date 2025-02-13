@@ -17,11 +17,15 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {colors} from '../../theme/colors';
 import {IMAGES} from '../../assets/Images';
 import {commonFontStyle} from '../../theme/fonts';
+import {useTranslation} from 'react-i18next';
+import {SCREENS} from '../../navigation/screenNames';
 // import Icon from 'react-native-vector-icons/Feather';
 
 const CELL_COUNT = 4;
 
 const VerificationScreen = ({navigation}) => {
+  const {t} = useTranslation();
+
   const [code, setCode] = useState('');
   const ref = useBlurOnFulfill({value: code, cellCount: CELL_COUNT});
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
@@ -30,36 +34,37 @@ const VerificationScreen = ({navigation}) => {
   });
 
   const handleVerify = () => {
-    if (code.length === 4) {
-      Alert.alert('Success', `Entered OTP: ${code}`);
-      // Implement verification logic
-    } else {
-      Alert.alert('Error', 'Please enter a valid 4-digit code.');
-    }
+    navigation.navigate(SCREENS.HomeScreen);
+    // if (code.length === 4) {
+    //   Alert.alert('Success', `Entered OTP: ${code}`);
+    //   // Implement verification logic
+    // } else {
+    //   Alert.alert('Error', 'Please enter a valid 4-digit code.');
+    // }
   };
 
   return (
     <KeyboardAwareScrollView contentContainerStyle={styles.container}>
       {/* Back Button */}
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}>
-        <Image
-          source={IMAGES.back}
-          style={{
-            width: 37,
-            height: 37,
-            elevation: 30,
-            borderWidth: 0.1,
-            borderRadius: 10,
-          }}
-        />
-        <Text style={styles.backText}>Verification Code</Text>
-      </TouchableOpacity>
+      <View style={styles.backButton}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image
+            source={IMAGES.back}
+            style={{
+              width: 37,
+              height: 37,
+              elevation: 30,
+              borderWidth: 0.1,
+              borderRadius: 10,
+            }}
+          />
+        </TouchableOpacity>
+        <Text style={styles.backText}>{t('Verification Code')}</Text>
+      </View>
 
       {/* Title and Phone Number */}
-      <Text style={styles.title}>Verification code sent</Text>
-      <Text style={styles.subtitle}>Enter 6-digit code sent at</Text>
+      <Text style={styles.title}>{t('Verification code sent')}</Text>
+      <Text style={styles.subtitle}>{t('Enter 6-digit code sent at')}</Text>
       <Text style={styles.phoneNumber}>+961 254 2578 255</Text>
 
       {/* OTP Input Field */}
@@ -86,12 +91,12 @@ const VerificationScreen = ({navigation}) => {
 
       {/* Resend Code */}
       <TouchableOpacity style={styles.resendButton}>
-        <Text style={styles.resendText}>Resend Code</Text>
+        <Text style={styles.resendText}>{t('Resend Code')}</Text>
       </TouchableOpacity>
 
       {/* Verify Button */}
       <TouchableOpacity style={styles.verifyButton} onPress={handleVerify}>
-        <Text style={styles.verifyText}>Verify</Text>
+        <Text style={styles.verifyText}>{t('Verify')}</Text>
       </TouchableOpacity>
     </KeyboardAwareScrollView>
   );
@@ -160,7 +165,7 @@ const styles = StyleSheet.create({
     paddingVertical: 17,
     paddingHorizontal: 30,
     borderRadius: 8,
-    marginTop: 20,
+    marginTop: 5,
     width: 160,
     alignItems: 'center',
     alignSelf: 'center',

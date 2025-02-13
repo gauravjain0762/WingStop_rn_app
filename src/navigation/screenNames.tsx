@@ -5,6 +5,9 @@ export const SCREENS = {
   GetStarted: 'GetStarted',
   SignUpScreen: 'SignUpScreen',
   VerificationScreen: 'VerificationScreen',
+  ViewAllScreen: 'ViewAllScreen',
+  DetailsViewScreen: 'DetailsViewScreen',
+  CartScreen: 'CartScreen',
 };
 
 export interface ScreenNames {
@@ -15,6 +18,9 @@ export interface ScreenNames {
   GetStarted: string;
   SignUpScreen: string;
   VerificationScreen: string;
+  ViewAllScreen: string;
+  DetailsViewScreen: string;
+  CartScreen: string;
 }
 
 export const SCREEN_NAMES: ScreenNames = {

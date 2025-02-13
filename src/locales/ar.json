@@ -26,5 +26,28 @@
   "Enter Age": "أدخل العمر",
   "Password": "كلمة المرور",
   "Enter Password": "أدخل كلمة المرور",
-  "Registration": "التسجيل"
+  "Registration": "التسجيل",
+
+  "Phone Number": "رقم الهاتف",
+  "Verification Code": "رمز التحقق",
+  "Verification code sent": "تم إرسال رمز التحقق",
+  "Enter 4-digit code sent at": "أدخل الرمز المكون من 4 أرقام المرسل إلى",
+  "Resend Code": "إعادة إرسال الرمز",
+  "Verify": "تحقق",
+
+  "Deliver to": "التوصيل إلى",
+  "Time Square": "تايم سكوير",
+  "Delivery": "التوصيل",
+  "Pick up": "الاستلام",
+  "Menu Categories": "فئات القائمة",
+  "View All": "عرض الكل",
+  "Special Offers": "عروض خاصة",
+  "Promotions": "عروض ترويجية",
+  "Burgers": "البرجر",
+  "Individual Meal": "وجبة فردية",
+  "Group Meals": "وجبات جماعية",
+  "House Party": "حفلة منزلية",
+  "Kids Meal Combo": "وجبة الأطفال",
+  "Platter": "طبق",
+  "Sides": "أطباق جانبية"
 }

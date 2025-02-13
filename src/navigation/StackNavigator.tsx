@@ -14,6 +14,9 @@ import Splash from '../screens/auth/Splash';
 import GetStarted from '../screens/auth/GetStarted';
 import SignUpScreen from '../screens/auth/SignUpScreen';
 import VerificationScreen from '../screens/auth/VerificationScreen';
+import ViewAllScreen from '../screens/home/ViewAllScreen';
+import DetailsViewScreen from '../screens/home/DetailsViewScreen';
+import CartScreen from '../screens/cart/CartScreen';
 
 export type RootStackParamList = {
   HomeScreen: undefined;
@@ -194,6 +197,30 @@ const StackNavigator: FC = () => {
         })}
         name={SCREENS.HomeScreen}
         component={HomeScreen}
+      />
+      <Stack.Screen
+        options={({navigation}) => ({
+          ...headerStyleTransparent,
+          headerShown: false,
+        })}
+        name={SCREENS.ViewAllScreen}
+        component={ViewAllScreen}
+      />
+      <Stack.Screen
+        options={({navigation}) => ({
+          ...headerStyleTransparent,
+          headerShown: false,
+        })}
+        name={SCREENS.DetailsViewScreen}
+        component={DetailsViewScreen}
+      />
+      <Stack.Screen
+        options={({navigation}) => ({
+          ...headerStyleTransparent,
+          headerShown: false,
+        })}
+        name={SCREENS.CartScreen}
+        component={CartScreen}
       />
     </Stack.Navigator>
   );
