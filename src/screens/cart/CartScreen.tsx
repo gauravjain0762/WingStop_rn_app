@@ -18,6 +18,7 @@ import {navigationRef} from '../../navigation/RootContainer';
 import {IMAGES} from '../../assets/Images';
 import {AppStyles} from '../../theme/appStyles';
 import {useTranslation} from 'react-i18next';
+import {SCREENS} from '../../navigation/screenNames';
 
 const CartScreen = () => {
   const {t} = useTranslation();
@@ -161,27 +162,30 @@ const CartScreen = () => {
         ))}
 
         <View style={[styles.discountSection, AppStyles.mainSide]}>
-          <Text style={styles.sectionTitle}>Apply Discount</Text>
+          <Text style={styles.sectionTitle}>{t('Apply Discount')}</Text>
           <TouchableOpacity>
-            <Text style={styles.viewOffers}>View Offers</Text>
+            <Text style={styles.viewOffers}>{t('View Offers')}</Text>
           </TouchableOpacity>
         </View>
         <View style={[styles.inputContainer, AppStyles.mainSide]}>
           <View style={styles.input}>
-            <TextInput style={styles.input1} placeholder="Enter code here" />
+            <TextInput
+              style={styles.input1}
+              placeholder={t('Enter code here')}
+            />
             <Image
               source={IMAGES.addnew}
               style={{width: 32, height: 22, resizeMode: 'contain'}}
             />
           </View>
           <TouchableOpacity style={styles.applyMainButton}>
-            <Text style={styles.applyText}>Apply</Text>
+            <Text style={styles.applyText}>{t('Apply')}</Text>
           </TouchableOpacity>
         </View>
 
         <View style={{}}>
           <View style={[styles.summaryContainer, {marginTop: 12}]}>
-            <Text style={styles.summaryTextBold}>Subtotal</Text>
+            <Text style={styles.summaryTextBold}>{t('Subtotal')}</Text>
             <Text style={styles.summaryTextBold}>AED 100.00</Text>
           </View>
           <View
@@ -189,16 +193,16 @@ const CartScreen = () => {
               styles.summaryContainer,
               {marginBottom: 18, marginTop: 20},
             ]}>
-            <Text style={styles.summaryText}>Delivery Fee</Text>
+            <Text style={styles.summaryText}>{t('Delivery Fee')}</Text>
             <Text style={styles.summaryText}>AED 5.00</Text>
           </View>
           <View style={[styles.summaryContainer, styles.lineStyle]}>
-            <Text style={styles.summaryText}>VAT</Text>
+            <Text style={styles.summaryText}>{t('VAT')}</Text>
             <Text style={styles.summaryText}>AED 2.00</Text>
           </View>
           <View style={[styles.summaryContainer, styles.lineStyle1]}>
             <Text style={styles.promoText}>
-              Promo Code{' '}
+              {t('Promo Code')}{' '}
               <Text style={{color: colors.themeColor}}>(Wing 50)</Text>
             </Text>
             <Text style={styles.promoText}>AED 5.00</Text>
@@ -217,25 +221,26 @@ const CartScreen = () => {
                 source={IMAGES.addnew}
                 style={{width: 32, height: 22, resizeMode: 'contain'}}
               />
-              <Text style={styles.redeemText}>Redeem Points</Text>
+              <Text style={styles.redeemText}>{t('Redeem Points')}</Text>
             </View>
             <TouchableOpacity style={styles.rediaStyle}>
               <View style={styles.rediaStyle1} />
             </TouchableOpacity>
           </View>
           <Text style={styles.redeemInfo}>
-            You have currently 100 points ={' '}
+            {t('You have currently 100 points')} ={' '}
             <Text style={{color: colors.themeColor}}>AED 10.00</Text>
           </Text>
 
           <View style={[styles.totalContainer, styles.lineStyle]}>
             <Text style={styles.totalText}>
-              Total <Text style={styles.totalText1}>(incl. VAT)</Text>
+              {t('Total')}{' '}
+              <Text style={styles.totalText1}>({t('incl. VAT')})</Text>
             </Text>
             <Text style={styles.totalText}>AED 117.00</Text>
           </View>
 
-          <Text style={styles.DeliveryText}>Delivery Instructions</Text>
+          <Text style={styles.DeliveryText}>{t('Delivery Instructions')}</Text>
           <TextInput
             style={styles.instructionInput}
             placeholder="Write Instructions"
@@ -244,10 +249,14 @@ const CartScreen = () => {
 
           <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.addItemButton}>
-              <Text style={styles.buttonText1}>Add Items</Text>
+              <Text style={styles.buttonText1}>{t('Add Items')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.checkoutButton}>
-              <Text style={styles.buttonText3}>Checkout</Text>
+            <TouchableOpacity
+              style={styles.checkoutButton}
+              onPress={() => {
+                navigationRef.navigate(SCREENS.CheckoutScreen);
+              }}>
+              <Text style={styles.buttonText3}>{t('Checkout')}</Text>
             </TouchableOpacity>
           </View>
           <View style={{height: 20}} />

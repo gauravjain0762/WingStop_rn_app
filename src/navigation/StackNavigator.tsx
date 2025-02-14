@@ -17,6 +17,7 @@ import VerificationScreen from '../screens/auth/VerificationScreen';
 import ViewAllScreen from '../screens/home/ViewAllScreen';
 import DetailsViewScreen from '../screens/home/DetailsViewScreen';
 import CartScreen from '../screens/cart/CartScreen';
+import CheckoutScreen from '../screens/checkout/CheckoutScreen';
 
 export type RootStackParamList = {
   HomeScreen: undefined;
@@ -221,6 +222,14 @@ const StackNavigator: FC = () => {
         })}
         name={SCREENS.CartScreen}
         component={CartScreen}
+      />
+      <Stack.Screen
+        options={({navigation}) => ({
+          ...headerStyleTransparent,
+          headerShown: false,
+        })}
+        name={SCREENS.CheckoutScreen}
+        component={CheckoutScreen}
       />
     </Stack.Navigator>
   );

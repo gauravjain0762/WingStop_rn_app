@@ -19,6 +19,7 @@ import {IMAGES} from '../../assets/Images';
 import {commonFontStyle} from '../../theme/fonts';
 import {colors} from '../../theme/colors';
 import {SCREENS} from '../../navigation/screenNames';
+import {navigationRef} from '../../navigation/RootContainer';
 
 type Props = {};
 
@@ -37,8 +38,9 @@ const GetStarted = ({navigation}) => {
   };
 
   const onGetStarted = () => {
+    navigationRef.navigate(SCREENS.CheckoutScreen);
     // navigation.navigate(SCREENS.HomeScreen);
-    navigation.navigate(SCREENS.SignUpScreen);
+    // navigation.navigate(SCREENS.SignUpScreen);
   };
 
   return (

@@ -45,4 +45,8 @@ export const IMAGES = {
   bg1: require('./Icons/bg1.png'),
   checkIn: require('./Icons/checkIn.png'),
   checkOut: require('./Icons/checkOut.png'),
+  bug: require('./Icons/bug.png'),
+  location: require('./Icons/location.png'),
+  pay: require('./Icons/pay.png'),
+  plush: require('./Icons/plush.png'),
 };
