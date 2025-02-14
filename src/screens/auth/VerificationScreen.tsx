@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Alert,
   Image,
+  SafeAreaView,
 } from 'react-native';
 import {
   CodeField,
@@ -19,6 +20,7 @@ import {IMAGES} from '../../assets/Images';
 import {commonFontStyle} from '../../theme/fonts';
 import {useTranslation} from 'react-i18next';
 import {SCREENS} from '../../navigation/screenNames';
+import {AppStyles} from '../../theme/appStyles';
 // import Icon from 'react-native-vector-icons/Feather';
 
 const CELL_COUNT = 4;
@@ -44,61 +46,63 @@ const VerificationScreen = ({navigation}) => {
   };
 
   return (
-    <KeyboardAwareScrollView contentContainerStyle={styles.container}>
-      {/* Back Button */}
-      <View style={styles.backButton}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image
-            source={IMAGES.back}
-            style={{
-              width: 37,
-              height: 37,
-              elevation: 30,
-              borderWidth: 0.1,
-              borderRadius: 10,
-            }}
-          />
+    <SafeAreaView style={AppStyles.mainWhiteContainer}>
+      <KeyboardAwareScrollView contentContainerStyle={styles.container}>
+        {/* Back Button */}
+        <View style={styles.backButton}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Image
+              source={IMAGES.back}
+              style={{
+                width: 37,
+                height: 37,
+                elevation: 30,
+                borderWidth: 0.1,
+                borderRadius: 10,
+              }}
+            />
+          </TouchableOpacity>
+          <Text style={styles.backText}>{t('Verification Code')}</Text>
+        </View>
+
+        {/* Title and Phone Number */}
+        <Text style={styles.title}>{t('Verification code sent')}</Text>
+        <Text style={styles.subtitle}>{t('Enter 6-digit code sent at')}</Text>
+        <Text style={styles.phoneNumber}>+961 254 2578 255</Text>
+
+        {/* OTP Input Field */}
+        <CodeField
+          ref={ref}
+          {...props}
+          value={code}
+          onChangeText={setCode}
+          cellCount={CELL_COUNT}
+          rootStyle={styles.codeFieldRoot}
+          keyboardType="number-pad"
+          textContentType="oneTimeCode"
+          renderCell={({index, symbol, isFocused}) => (
+            <View
+              key={index}
+              style={[styles.cell, isFocused && styles.focusedCell]}
+              onLayout={getCellOnLayoutHandler(index)}>
+              <Text style={styles.cellText}>
+                {symbol || (isFocused ? <Cursor /> : null)}
+              </Text>
+            </View>
+          )}
+        />
+
+        {/* Resend Code */}
+        <TouchableOpacity style={styles.resendButton}>
+          <Text style={styles.resendText}>{t('Resend Code')}</Text>
         </TouchableOpacity>
-        <Text style={styles.backText}>{t('Verification Code')}</Text>
-      </View>
 
-      {/* Title and Phone Number */}
-      <Text style={styles.title}>{t('Verification code sent')}</Text>
-      <Text style={styles.subtitle}>{t('Enter 6-digit code sent at')}</Text>
-      <Text style={styles.phoneNumber}>+961 254 2578 255</Text>
-
-      {/* OTP Input Field */}
-      <CodeField
-        ref={ref}
-        {...props}
-        value={code}
-        onChangeText={setCode}
-        cellCount={CELL_COUNT}
-        rootStyle={styles.codeFieldRoot}
-        keyboardType="number-pad"
-        textContentType="oneTimeCode"
-        renderCell={({index, symbol, isFocused}) => (
-          <View
-            key={index}
-            style={[styles.cell, isFocused && styles.focusedCell]}
-            onLayout={getCellOnLayoutHandler(index)}>
-            <Text style={styles.cellText}>
-              {symbol || (isFocused ? <Cursor /> : null)}
-            </Text>
-          </View>
-        )}
-      />
-
-      {/* Resend Code */}
-      <TouchableOpacity style={styles.resendButton}>
-        <Text style={styles.resendText}>{t('Resend Code')}</Text>
-      </TouchableOpacity>
-
-      {/* Verify Button */}
-      <TouchableOpacity style={styles.verifyButton} onPress={handleVerify}>
-        <Text style={styles.verifyText}>{t('Verify')}</Text>
-      </TouchableOpacity>
-    </KeyboardAwareScrollView>
+        {/* Verify Button */}
+        <TouchableOpacity style={styles.verifyButton} onPress={handleVerify}>
+          <Text style={styles.verifyText}>{t('Verify')}</Text>
+        </TouchableOpacity>
+      </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 };
 
