@@ -12,6 +12,7 @@ export const IMAGES = {
   pick1: require('./Icons/pick1.png'),
   info: require('./Icons/info.png'),
   addnew: require('./Icons/addnew.png'),
+  close: require('./Icons/close.png'),
 
   banner: require('./Icons/banner.png'),
   bg: require('./Icons/bg.png'),

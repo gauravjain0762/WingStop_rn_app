@@ -19,6 +19,7 @@ import DetailsViewScreen from '../screens/home/DetailsViewScreen';
 import CartScreen from '../screens/cart/CartScreen';
 import CheckoutScreen from '../screens/checkout/CheckoutScreen';
 import MyOrdersScreen from '../screens/myOrders/MyOrdersScreen';
+import OrdersDetailScreen from '../screens/myOrders/OrdersDetailScreen';
 
 export type RootStackParamList = {
   HomeScreen: undefined;
@@ -239,6 +240,14 @@ const StackNavigator: FC = () => {
         })}
         name={SCREENS.MyOrdersScreen}
         component={MyOrdersScreen}
+      />
+      <Stack.Screen
+        options={({navigation}) => ({
+          ...headerStyleTransparent,
+          headerShown: false,
+        })}
+        name={SCREENS.OrdersDetailScreen}
+        component={OrdersDetailScreen}
       />
     </Stack.Navigator>
   );

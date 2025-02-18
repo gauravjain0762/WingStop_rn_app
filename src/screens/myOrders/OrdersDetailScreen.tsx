@@ -45,7 +45,14 @@ const orders = [
   },
 ];
 
-const MyOrdersScreen = () => {
+const filters = [
+  'All Orders',
+  'Active Orders',
+  'Completed Orders',
+  'Cancelled Orders',
+];
+
+const OrdersDetailScreen = () => {
   const [selectedCategory, setSelectedCategory] = useState('1');
   const [quantities, setQuantities] = useState({});
   const [cart, setCart] = useState({});
@@ -53,13 +60,6 @@ const MyOrdersScreen = () => {
   const [selectID, setSelectID] = useState('');
 
   const {t} = useTranslation();
-
-  const filters = [
-    t('All Orders'),
-    t('Active Orders'),
-    t('Completed Orders'),
-    t('Cancelled Orders'),
-  ];
 
   const handleIncrease = id => {
     setQuantities(prev => ({...prev, [id]: (prev[id] || 0) + 1}));
@@ -71,7 +71,7 @@ const MyOrdersScreen = () => {
 
   return (
     <SafeAreaView style={[AppStyles.mainWhiteContainer]}>
-      <CustomHeader title={t('My Orders')} />
+      <CustomHeader title={t('Orders Detail')} />
       <View
         style={[
           {flexDirection: 'row', alignItems: 'center', marginVertical: 16},
@@ -101,16 +101,7 @@ const MyOrdersScreen = () => {
         onRequestClose={() => setModalVisible(false)}>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text style={styles.modalTitle}>{t('My Orders')}</Text>
-              <TouchableOpacity
-                onPress={() => {
-                  setModalVisible(false);
-                }}
-                style={{marginBottom: 20}}>
-                <Image source={IMAGES.close} style={{width: 18, height: 18}} />
-              </TouchableOpacity>
-            </View>
+            <Text style={styles.modalTitle}>My Orders</Text>
             {filters.map((filter, index) => (
               <TouchableOpacity
                 key={index}
@@ -194,7 +185,6 @@ const styles = StyleSheet.create({
   modalTitle: {
     ...commonFontStyle('i_700', 25, colors.black),
     marginBottom: 20,
-    flex: 1,
   },
   filterText: {...commonFontStyle('i_400', 20, colors.black)},
   filterOption: {
@@ -218,4 +208,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MyOrdersScreen;
+export default OrdersDetailScreen;
