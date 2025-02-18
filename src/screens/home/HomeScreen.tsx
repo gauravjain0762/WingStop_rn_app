@@ -35,10 +35,18 @@ const CustomTabBar = ({navigation, selectedTab, setSelectedTab}) => {
       <TouchableOpacity onPress={() => setSelectedTab('Home')}>
         <Image source={IMAGES.home} style={[styles.iconTab]} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => setSelectedTab('Cart')}>
+      <TouchableOpacity
+        onPress={() => {
+          navigationRef.navigate(SCREENS.MyOrdersScreen);
+          setSelectedTab('Cart');
+        }}>
         <Image source={IMAGES.list} style={[styles.iconTab]} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => setSelectedTab('Profile')}>
+      <TouchableOpacity
+        onPress={() => {
+          navigationRef.navigate(SCREENS.CartScreen);
+          setSelectedTab('Profile');
+        }}>
         <Image source={IMAGES.addCart} style={[styles.iconTab]} />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => setSelectedTab('Profile')}>

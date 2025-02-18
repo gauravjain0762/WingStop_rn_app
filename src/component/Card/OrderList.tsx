@@ -27,7 +27,11 @@ const OrderList = ({item, cart, setCart}) => {
   const {t} = useTranslation();
 
   return (
-    <View style={styles.card}>
+    <TouchableOpacity
+      onPress={() => {
+        navigationRef.navigate(SCREENS.OrdersDetailScreen);
+      }}
+      style={styles.card}>
       <View
         style={{flexDirection: 'row', alignItems: 'center', marginVertical: 5}}>
         <Text style={styles.title}>{item.title}</Text>
@@ -61,7 +65,7 @@ const OrderList = ({item, cart, setCart}) => {
           <Text style={styles.detailsText}>{t('More Details')}</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

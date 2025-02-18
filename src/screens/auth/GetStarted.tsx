@@ -38,7 +38,7 @@ const GetStarted = ({navigation}) => {
   };
 
   const onGetStarted = () => {
-    // navigationRef.navigate(SCREENS.OrdersDetailScreen);
+    // navigationRef.navigate(SCREENS.MyOrdersScreen);
     // navigation.navigate(SCREENS.HomeScreen);
     navigation.navigate(SCREENS.SignUpScreen);
   };
