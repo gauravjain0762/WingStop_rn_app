@@ -17,7 +17,7 @@ import {
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {colors} from '../../theme/colors';
 import {IMAGES} from '../../assets/Images';
-import {commonFontStyle} from '../../theme/fonts';
+import {commonFontStyle, wp} from '../../theme/fonts';
 import {useTranslation} from 'react-i18next';
 import {SCREENS} from '../../navigation/screenNames';
 import {AppStyles} from '../../theme/appStyles';
@@ -57,7 +57,7 @@ const VerificationScreen = ({navigation}) => {
                 width: 37,
                 height: 37,
                 elevation: 30,
-                borderWidth: 0.1,
+                borderWidth: 0.2,
                 borderRadius: 10,
               }}
             />
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.bgColor,
     // alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: wp(20),
     paddingTop: 40,
   },
   backButton: {

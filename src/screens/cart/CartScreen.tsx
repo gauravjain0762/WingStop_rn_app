@@ -10,6 +10,7 @@ import {
   StatusBar,
   TextInput,
   Switch,
+  Platform,
 } from 'react-native';
 import {IconButton} from 'react-native-paper';
 import {commonFontStyle, wp} from '../../theme/fonts';
@@ -509,7 +510,7 @@ const styles = StyleSheet.create({
     // elevation: 10,
     borderWidth: 1,
     borderColor: '#ddd',
-    shadowOpacity: 10,
+    shadowOpacity: Platform.OS == 'ios' ? 0 : 10,
     marginHorizontal: wp(20),
     marginBottom: 20,
   },

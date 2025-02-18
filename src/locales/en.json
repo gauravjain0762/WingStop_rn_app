@@ -97,5 +97,15 @@
   "Apple Pay": "Apple Pay",
   "Your order has been placed successfully.": "Your order has been placed\nsuccessfully.",
   "Back To Home": "Back To Home",
-  "Order Detail": "Order Detail"
+  "Order Detail": "Order Detail",
+  "My Orders": "My Orders",
+  "All Orders": "All Orders",
+  "Order Again": "Order Again",
+  "More Details": "More Details",
+  "Branch": "Branch",
+  "Date & Time": "Date & Time",
+  "Order ID": "Order ID",
+  "Active Orders": "Active Orders",
+  "Completed Orders": "Completed Orders",
+  "Cancelled Orders": "Cancelled Orders"
 }

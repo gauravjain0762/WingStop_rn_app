@@ -222,12 +222,10 @@ const CheckoutScreen = () => {
         </TouchableOpacity>
       </ScrollView>
 
-      {modalVisible && (
-        <OrderSuccessModal
-          visible={modalVisible}
-          onClose={() => setModalVisible(false)}
-        />
-      )}
+      <OrderSuccessModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+      />
     </SafeAreaView>
   );
 };

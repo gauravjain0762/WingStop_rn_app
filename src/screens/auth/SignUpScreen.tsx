@@ -11,7 +11,7 @@ import {
 import {IMAGES} from '../../assets/Images';
 import {useTranslation} from 'react-i18next';
 import {useDispatch, useSelector} from 'react-redux';
-import {commonFontStyle} from '../../theme/fonts';
+import {commonFontStyle, wp} from '../../theme/fonts';
 import {colors} from '../../theme/colors';
 import CustomButton from '../../component/common/CustomButton';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -49,7 +49,7 @@ const SignUpScreen = ({navigation}) => {
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps={'handled'}
         showsVerticalScrollIndicator={false}
-        style={[{flex: 1}]}>
+        style={[{flex: 1, marginHorizontal: wp(20)}]}>
         {/* Logo */}
         <Image source={IMAGES.logo} style={styles.logo} />
 
@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.bgColor,
-    paddingHorizontal: 20,
   },
   logo: {
     width: 206,

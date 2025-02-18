@@ -11,10 +11,11 @@ import {
 import {IMAGES} from '../../assets/Images';
 import {useTranslation} from 'react-i18next';
 import {useDispatch, useSelector} from 'react-redux';
-import {commonFontStyle} from '../../theme/fonts';
+import {commonFontStyle, wp} from '../../theme/fonts';
 import {colors} from '../../theme/colors';
 import CustomButton from '../../component/common/CustomButton';
 import {SCREENS} from '../../navigation/screenNames';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const LoginScreen = ({navigation}) => {
   const {t} = useTranslation();
@@ -28,49 +29,55 @@ const LoginScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Logo */}
-      <Image source={IMAGES.logo} style={styles.logo} />
+      <KeyboardAwareScrollView
+        keyboardShouldPersistTaps={'handled'}
+        showsVerticalScrollIndicator={false}
+        style={[{flex: 1, marginHorizontal: wp(20)}]}>
+        {/* Logo */}
+        <Image source={IMAGES.logo} style={styles.logo} />
 
-      {/* Input Field */}
-      <Text style={styles.label}>{t('Mobile Number/User ID')}</Text>
-      <TextInput
-        style={styles.input}
-        placeholder={t('Enter here...')}
-        placeholderTextColor="#999"
-        value={userID}
-        onChangeText={setUserID}
-        keyboardType="numeric"
-      />
+        {/* Input Field */}
+        <Text style={styles.label}>{t('Mobile Number/User ID')}</Text>
+        <TextInput
+          style={styles.input}
+          placeholder={t('Enter here...')}
+          placeholderTextColor="#999"
+          value={userID}
+          onChangeText={setUserID}
+          keyboardType="numeric"
+        />
 
-      {/* Login Button */}
-      <CustomButton
-        onPress={handleLogin}
-        title={t('Login')}
-        extraStyle={{marginTop: 35}}
-      />
+        {/* Login Button */}
+        <CustomButton
+          onPress={handleLogin}
+          title={t('Login')}
+          extraStyle={{marginTop: 35}}
+        />
 
-      {/* Forgot Password */}
-      <Text style={styles.forgotPassword}>{t('Forget password')}</Text>
+        {/* Forgot Password */}
+        <Text style={styles.forgotPassword}>{t('Forget password')}</Text>
 
-      {/* Social Login Buttons */}
-      <View style={styles.socialContainer}>
-        <TouchableOpacity style={styles.socialButton}>
-          <Image source={IMAGES.apple} style={styles.imageStyle} />
-          <Text style={styles.socialText}>{t('Sign in with Apple')}</Text>
+        {/* Social Login Buttons */}
+        <View style={styles.socialContainer}>
+          <TouchableOpacity style={styles.socialButton}>
+            <Image source={IMAGES.apple} style={styles.imageStyle} />
+            <Text style={styles.socialText}>{t('Sign in with Apple')}</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.socialButton}>
+            <Image source={IMAGES.google} style={styles.imageStyle} />
+            <Text style={styles.socialText}>{t('Sign in with Google')}</Text>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity
+          style={{alignSelf: 'center'}}
+          onPress={() => navigation.navigate(SCREENS.SignUpScreen)}>
+          <Text style={styles.signInText}>
+            {t('Create a New account?')}{' '}
+            <Text style={styles.signInLink}>{t('Sign up')}</Text>
+          </Text>
         </TouchableOpacity>
-
-        <TouchableOpacity style={styles.socialButton}>
-          <Image source={IMAGES.google} style={styles.imageStyle} />
-          <Text style={styles.socialText}>{t('Sign in with Google')}</Text>
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity
-        onPress={() => navigation.navigate(SCREENS.SignUpScreen)}>
-        <Text style={styles.signInText}>
-          {t('Create a New account?')}{' '}
-          <Text style={styles.signInLink}>{t('Sign up')}</Text>
-        </Text>
-      </TouchableOpacity>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };
@@ -78,16 +85,15 @@ const LoginScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
     backgroundColor: colors.bgColor,
-    paddingHorizontal: 20,
   },
   logo: {
     width: 206,
     height: 71,
     resizeMode: 'contain',
     marginVertical: 80,
+    alignSelf: 'center',
   },
   imageStyle: {
     width: 18,
@@ -123,6 +129,7 @@ const styles = StyleSheet.create({
   forgotPassword: {
     marginTop: 14,
     ...commonFontStyle('400', 18, colors._686868),
+    alignSelf: 'center',
   },
   socialContainer: {
     flexDirection: 'row',

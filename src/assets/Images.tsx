@@ -49,4 +49,5 @@ export const IMAGES = {
   location: require('./Icons/location.png'),
   pay: require('./Icons/pay.png'),
   plush: require('./Icons/plush.png'),
+  filter: require('./Icons/filter.png'),
 };

@@ -40,7 +40,7 @@ const CustomHeader = ({title}) => {
               width: 37,
               height: 37,
               elevation: 10,
-              borderWidth: 0.01,
+              borderWidth: 0.2,
               borderRadius: 10,
             }}
           />

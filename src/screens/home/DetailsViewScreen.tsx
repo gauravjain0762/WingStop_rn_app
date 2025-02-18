@@ -9,6 +9,7 @@ import {
   SafeAreaView,
   ScrollView,
   TextInput,
+  Platform,
 } from 'react-native';
 import CustomHeader from '../../component/common/CustomHeader';
 import {AppStyles} from '../../theme/appStyles';
@@ -329,7 +330,7 @@ const styles = StyleSheet.create({
     minHeight: 110,
     textAlignVertical: 'top',
     // elevation: 1,
-    shadowOpacity: 10,
+    shadowOpacity: Platform.OS == 'ios' ? 0 : 10,
   },
   cartContainer: {
     marginTop: 16,
@@ -339,7 +340,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    shadowOpacity: 10,
+    shadowOpacity: Platform.OS == 'ios' ? 0 : 10,
   },
   cartLeft: {
     flexDirection: 'row',

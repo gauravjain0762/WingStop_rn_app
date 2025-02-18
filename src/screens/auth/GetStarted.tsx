@@ -38,9 +38,9 @@ const GetStarted = ({navigation}) => {
   };
 
   const onGetStarted = () => {
-    // navigationRef.navigate(SCREENS.CheckoutScreen);
+    navigationRef.navigate(SCREENS.MyOrdersScreen);
     // navigation.navigate(SCREENS.HomeScreen);
-    navigation.navigate(SCREENS.SignUpScreen);
+    // navigation.navigate(SCREENS.SignUpScreen);
   };
 
   return (
@@ -130,17 +130,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#ddd',
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
     flexDirection: 'row',
     gap: 8,
+    width: '45%',
   },
   getStartedButton: {
     backgroundColor: colors.themeColor,
     // paddingHorizontal: 90,
     borderRadius: 10,
     marginBottom: 30,
-    width: '100%',
+    width: '92%',
     alignItems: 'center',
     height: 57,
     justifyContent: 'center',

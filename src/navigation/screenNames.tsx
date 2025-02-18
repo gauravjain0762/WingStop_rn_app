@@ -9,6 +9,7 @@ export const SCREENS = {
   DetailsViewScreen: 'DetailsViewScreen',
   CartScreen: 'CartScreen',
   CheckoutScreen: 'CheckoutScreen',
+  MyOrdersScreen: 'MyOrdersScreen',
 };
 
 export interface ScreenNames {

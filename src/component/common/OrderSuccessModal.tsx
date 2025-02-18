@@ -1,7 +1,14 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  Platform,
+} from 'react-native';
 import {IMAGES} from '../../assets/Images';
-import Modal from 'react-native-modal';
+import ReactNativeModal from 'react-native-modal';
 import {commonFontStyle} from '../../theme/fonts';
 import {colors} from '../../theme/colors';
 import {useTranslation} from 'react-i18next';
@@ -10,10 +17,8 @@ const OrderSuccessModal = ({visible, onClose}) => {
   const {t} = useTranslation();
 
   return (
-    <Modal
-      animationOutTiming={1000}
+    <ReactNativeModal
       useNativeDriver={Platform.OS == 'ios' ? false : true}
-      onBackdropPress={() => onClose()}
       isVisible={visible}
       style={{
         margin: 0,
@@ -29,13 +34,13 @@ const OrderSuccessModal = ({visible, onClose}) => {
             <TouchableOpacity style={styles.backButton} onPress={onClose}>
               <Text style={styles.backButtonText}>{t('Back To Home')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.orderButton}>
+            <TouchableOpacity style={styles.orderButton} onPress={onClose}>
               <Text style={styles.orderButtonText}>{t('Order Detail')}</Text>
             </TouchableOpacity>
           </View>
         </View>
       </View>
-    </Modal>
+    </ReactNativeModal>
   );
 };
 

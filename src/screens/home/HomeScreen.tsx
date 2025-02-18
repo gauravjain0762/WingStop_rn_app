@@ -212,8 +212,8 @@ const HomeScreen = (props: Props) => {
       <View
         style={{
           position: 'absolute',
-          bottom: 10,
-          width: '100%',
+          bottom: 20,
+          width: '90%',
           alignSelf: 'center',
         }}>
         <CustomTabBar
@@ -426,9 +426,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
+    // shadowOffset: {width: 0, height: 0},
+    // shadowOpacity: 0.4,
+    // shadowRadius: 5,
     // elevation: 5, // For Android shadow
   },
   offerImage: {
