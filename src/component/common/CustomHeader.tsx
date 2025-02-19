@@ -23,7 +23,7 @@ const categories = [
   {id: '3', name: 'Individual...', icon: 'user'},
 ];
 
-const CustomHeader = ({title}) => {
+const CustomHeader = ({title, isSetting}) => {
   const navigation = useNavigation();
   const [selectedCategory, setSelectedCategory] = useState('1');
   const {t} = useTranslation();
@@ -47,18 +47,29 @@ const CustomHeader = ({title}) => {
         </TouchableOpacity>
         <Text style={styles.backText}>{title}</Text>
         <View style={styles.rightContainer}>
-          <TouchableOpacity>
-            <Image
-              source={IMAGES.notification}
-              style={[styles.iconStyle3, {marginRight: 15}]}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              navigationRef.navigate(SCREENS.CartScreen);
-            }}>
-            <Image source={IMAGES.cardAdd} style={styles.iconStyle3} />
-          </TouchableOpacity>
+          {isSetting ? (
+            <TouchableOpacity>
+              <Image
+                source={IMAGES.setting}
+                style={[styles.iconStyle3, {marginRight: 15}]}
+              />
+            </TouchableOpacity>
+          ) : (
+            <>
+              <TouchableOpacity>
+                <Image
+                  source={IMAGES.notification}
+                  style={[styles.iconStyle3, {marginRight: 15}]}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigationRef.navigate(SCREENS.CartScreen);
+                }}>
+                <Image source={IMAGES.cardAdd} style={styles.iconStyle3} />
+              </TouchableOpacity>
+            </>
+          )}
         </View>
       </View>
     </View>

@@ -49,7 +49,11 @@ const CustomTabBar = ({navigation, selectedTab, setSelectedTab}) => {
         }}>
         <Image source={IMAGES.addCart} style={[styles.iconTab]} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => setSelectedTab('Profile')}>
+      <TouchableOpacity
+        onPress={() => {
+          navigationRef.navigate(SCREENS.AccountScreen);
+          setSelectedTab('Profile');
+        }}>
         <Image source={IMAGES.usetTab} style={[styles.iconTab]} />
       </TouchableOpacity>
     </View>

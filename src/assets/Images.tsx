@@ -51,4 +51,6 @@ export const IMAGES = {
   pay: require('./Icons/pay.png'),
   plush: require('./Icons/plush.png'),
   filter: require('./Icons/filter.png'),
+  bag: require('./Icons/bag.png'),
+  setting: require('./Icons/setting.png'),
 };

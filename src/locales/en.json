@@ -107,5 +107,13 @@
   "Order ID": "Order ID",
   "Active Orders": "Active Orders",
   "Completed Orders": "Completed Orders",
-  "Cancelled Orders": "Cancelled Orders"
+  "Cancelled Orders": "Cancelled Orders",
+  "Night Bundle": "Night Bundle",
+  "Order Type": "Order Type",
+  "Branch Name": "Branch Name",
+  "Date & Time:": "Date & Time:",
+  "Ordered Items": "Ordered Items",
+  "Re-order": "Re-order",
+  "Total Amount": "Total Amount",
+  "Promo Code (wing 50)": "Promo Code (wing 50)"
 }

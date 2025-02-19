@@ -14,17 +14,17 @@ export function getFontType(fontWeight: any) {
   } else if (fontWeight == '300') {
     return 'Gilroy-Light';
   } else if (fontWeight == 'i_600') {
-    return 'Inter_18pt-SemiBold';
+    return 'Inter-SemiBold';
   } else if (fontWeight == 'i_400') {
-    return 'Inter_18pt-Regular';
+    return 'Inter-Regular';
   } else if (fontWeight == 'i_700') {
-    return 'Inter_18pt-Bold';
+    return 'Inter-Bold';
   } else if (fontWeight == 'i_800') {
-    return 'Inter_18pt-ExtraBold';
+    return 'Inter-ExtraBold';
   } else if (fontWeight == 'i_500') {
-    return 'Inter_18pt-Medium';
+    return 'Inter-Medium';
   } else if (fontWeight == 'i_300') {
-    return 'Inter_18pt-Light';
+    return 'Inter-Light';
   } else {
     return 'Gilroy-Regular';
   }

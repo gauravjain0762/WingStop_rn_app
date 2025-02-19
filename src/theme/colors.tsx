@@ -27,6 +27,9 @@ export const colors = {
   _8C8C8C: '#8C8C8C',
   _C13230: '#C13230',
   _878585: '#878585',
+  _4D4C4C: '#4D4C4C',
+  _585858: '#585858',
+  _E1E1E180: '#E1E1E180',
 };
 
 export const darkThemeColors = {
