@@ -12,6 +12,7 @@ export const SCREENS = {
   MyOrdersScreen: 'MyOrdersScreen',
   OrdersDetailScreen: 'OrdersDetailScreen',
   AccountScreen: 'AccountScreen',
+  Profile: 'Profile',
 };
 
 export interface ScreenNames {
@@ -28,6 +29,7 @@ export interface ScreenNames {
   CheckoutScreen: string;
   OrdersDetailScreen: string;
   AccountScreen: string;
+  Profile: string;
 }
 
 export const SCREEN_NAMES: ScreenNames = {

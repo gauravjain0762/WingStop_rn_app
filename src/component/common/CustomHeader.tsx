@@ -49,10 +49,7 @@ const CustomHeader = ({title, isSetting}) => {
         <View style={styles.rightContainer}>
           {isSetting ? (
             <TouchableOpacity>
-              <Image
-                source={IMAGES.setting}
-                style={[styles.iconStyle3, {marginRight: 15}]}
-              />
+              <Image source={IMAGES.setting} style={[styles.iconStyle3]} />
             </TouchableOpacity>
           ) : (
             <>

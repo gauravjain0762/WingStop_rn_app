@@ -30,6 +30,10 @@ export const colors = {
   _4D4C4C: '#4D4C4C',
   _585858: '#585858',
   _E1E1E180: '#E1E1E180',
+  _676767: '#676767',
+  _D5FFE7: '#D5FFE7',
+  _97E7B6: '#97E7B6',
+  _BD1113: '#BD1113',
 };
 
 export const darkThemeColors = {
