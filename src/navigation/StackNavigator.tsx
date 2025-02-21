@@ -22,6 +22,13 @@ import MyOrdersScreen from '../screens/myOrders/MyOrdersScreen';
 import OrdersDetailScreen from '../screens/myOrders/OrdersDetailScreen';
 import AccountScreen from '../screens/Account/AccountScreen';
 import Profile from '../screens/Account/Profile';
+import SelectOrder from '../screens/myOrders/SelectOrder';
+import LoyalityScreen from '../screens/Loyality/LoyalityScreen';
+import Notification from '../screens/Account/Notification';
+import MyAddress from '../screens/Account/MyAddress';
+import SearchScreen from '../screens/home/SearchScreen';
+import PromotionScreen from '../screens/myOrders/PromotionScreen';
+import PromotionDetails from '../screens/myOrders/PromotionDetails';
 
 export type RootStackParamList = {
   HomeScreen: undefined;
@@ -266,6 +273,62 @@ const StackNavigator: FC = () => {
         })}
         name={SCREENS.Profile}
         component={Profile}
+      />
+      <Stack.Screen
+        options={({navigation}) => ({
+          ...headerStyleTransparent,
+          headerShown: false,
+        })}
+        name={SCREENS.SelectOrder}
+        component={SelectOrder}
+      />
+      <Stack.Screen
+        options={({navigation}) => ({
+          ...headerStyleTransparent,
+          headerShown: false,
+        })}
+        name={SCREENS.LoyalityScreen}
+        component={LoyalityScreen}
+      />
+      <Stack.Screen
+        options={({navigation}) => ({
+          ...headerStyleTransparent,
+          headerShown: false,
+        })}
+        name={SCREENS.Notification}
+        component={Notification}
+      />
+      <Stack.Screen
+        options={({navigation}) => ({
+          ...headerStyleTransparent,
+          headerShown: false,
+        })}
+        name={SCREENS.MyAddress}
+        component={MyAddress}
+      />
+      <Stack.Screen
+        options={({navigation}) => ({
+          ...headerStyleTransparent,
+          headerShown: false,
+        })}
+        name={SCREENS.SearchScreen}
+        component={SearchScreen}
+      />
+      <Stack.Screen
+        options={({navigation}) => ({
+          ...headerStyleTransparent,
+          headerShown: false,
+        })}
+        name={SCREENS.PromotionScreen}
+        component={PromotionScreen}
+      />
+      <Stack.Screen
+        options={({navigation}) => ({
+          ...headerStyleTransparent,
+          headerShown: false,
+        })}
+        name={SCREENS.PromotionDetails}
+        component={PromotionDetails}
       />
     </Stack.Navigator>
   );

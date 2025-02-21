@@ -16,7 +16,8 @@ import {AppStyles} from '../../theme/appStyles';
 import {commonFontStyle, SCREEN_WIDTH, wp} from '../../theme/fonts';
 import {useTranslation} from 'react-i18next';
 import {navigationRef} from '../../navigation/RootContainer';
-import {SCREENS} from '../../navigation/screenNames';
+import {SCREENS, SCREEN_NAMES} from '../../navigation/screenNames';
+import {navigateTo} from '../../utils/commonFunction';
 
 type Props = {};
 
@@ -95,11 +96,17 @@ const HomeScreen = (props: Props) => {
           </View>
         </View>
         <View style={styles.rightContainer}>
-          <Image
-            source={IMAGES.notification}
-            style={[styles.iconStyle3, {marginRight: 15}]}
-          />
-          <Image source={IMAGES.search} style={styles.iconStyle3} />
+          <TouchableOpacity
+            onPress={() => navigateTo(SCREEN_NAMES.Notification)}>
+            <Image
+              source={IMAGES.notification}
+              style={[styles.iconStyle3, {marginRight: 15}]}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigateTo(SCREEN_NAMES.SearchScreen)}>
+            <Image source={IMAGES.search} style={styles.iconStyle3} />
+          </TouchableOpacity>
         </View>
       </View>
 

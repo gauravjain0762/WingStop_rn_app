@@ -26,14 +26,22 @@ const data = [
   {
     title: 'Order History',
     icon: IMAGES.order_history,
+    onPress: () => navigateTo(SCREEN_NAMES.SelectOrder),
   },
   {
     title: 'Addresses',
     icon: IMAGES.addresses,
+    onPress: () => navigateTo(SCREEN_NAMES.MyAddress),
+  },
+  {
+    title: 'Loyalty Points',
+    icon: IMAGES.loyaltypoints,
+    onPress: () => navigateTo(SCREEN_NAMES.LoyalityScreen),
   },
   {
     title: 'Offers',
     icon: IMAGES.offers,
+    onPress: () => navigateTo(SCREEN_NAMES.PromotionScreen),
   },
   {
     title: 'Feedback',

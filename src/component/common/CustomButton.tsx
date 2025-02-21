@@ -19,6 +19,7 @@ type Props = {
   disabled?: boolean;
   leftIcon?: any;
   extraTextStyle: TextStyle;
+  rightIcon?: any;
 };
 
 const CustomButton = ({
@@ -30,6 +31,7 @@ const CustomButton = ({
   leftIcon,
   disabled = false,
   extraTextStyle,
+  rightIcon,
 }: Props) => {
   return (
     <TouchableOpacity
@@ -47,6 +49,7 @@ const CustomButton = ({
         ]}>
         {title}
       </Text>
+      {rightIcon && <Image source={rightIcon} style={styles.rightArrow} />}
     </TouchableOpacity>
   );
 };

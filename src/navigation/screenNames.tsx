@@ -13,6 +13,13 @@ export const SCREENS = {
   OrdersDetailScreen: 'OrdersDetailScreen',
   AccountScreen: 'AccountScreen',
   Profile: 'Profile',
+  SelectOrder: 'SelectOrder',
+  LoyalityScreen: 'LoyalityScreen',
+  Notification: 'Notification',
+  MyAddress: 'MyAddress',
+  SearchScreen: 'SearchScreen',
+  PromotionScreen: 'PromotionScreen',
+  PromotionDetails: 'PromotionDetails',
 };
 
 export interface ScreenNames {
@@ -30,6 +37,13 @@ export interface ScreenNames {
   OrdersDetailScreen: string;
   AccountScreen: string;
   Profile: string;
+  SelectOrder: string;
+  LoyalityScreen: string;
+  Notification: string;
+  MyAddress: string;
+  SearchScreen: string;
+  PromotionScreen: string;
+  PromotionDetails: string;
 }
 
 export const SCREEN_NAMES: ScreenNames = {
