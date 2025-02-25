@@ -1,15 +1,15 @@
-import Toast from "react-native-toast-message";
-import { navigationRef } from "../navigation/RootContainer";
-import { CommonActions } from "@react-navigation/native";
-import ImagePicker from "react-native-image-crop-picker";
-import moment from "moment";
+import Toast from 'react-native-toast-message';
+import {navigationRef} from '../navigation/RootContainer';
+import {CommonActions} from '@react-navigation/native';
+import ImagePicker from 'react-native-image-crop-picker';
+import moment from 'moment';
 
 export const successToast = (message: string) => {
-  Toast.show({ type: "success", text1: message });
+  Toast.show({type: 'success', text1: message});
 };
 
 export const errorToast = (message: string) => {
-  Toast.show({ type: "error", text1: message });
+  Toast.show({type: 'error', text1: message});
 };
 
 export const emailCheck = (email: string) => {
@@ -44,8 +44,8 @@ export const resetNavigation = (name: string, params?: any | undefined) => {
   navigationRef.dispatch(
     CommonActions.reset({
       index: 1,
-      routes: [{ name: name, params: params }],
-    })
+      routes: [{name: name, params: params}],
+    }),
   );
 };
 
@@ -53,10 +53,14 @@ export const navigateTo = (name: string, params?: any | undefined) => {
   navigationRef.navigate(name, params);
 };
 
+export const goBack = () => {
+  navigationRef.goBack();
+};
+
 type ImagePickerProps = {
   params?: object;
   onSucess: (params: object) => void;
-  onFail?: (params: { message: string }) => void | undefined;
+  onFail?: (params: {message: string}) => void | undefined;
 };
 export const openImagePicker = ({
   params,
@@ -67,19 +71,19 @@ export const openImagePicker = ({
     ImagePicker.openPicker({
       multiple: false,
       cropping: false,
-      mediaType: "photo",
+      mediaType: 'photo',
       freeStyleCropEnabled: false,
       ...params,
     })
-      .then((image) => {
+      .then(image => {
         let obj = {
           ...image,
           uri: image.path,
-          name: "image_" + moment().unix() + "_" + image.path.split("/").pop(),
+          name: 'image_' + moment().unix() + '_' + image.path.split('/').pop(),
         };
         onSucess(obj);
       })
-      .catch((err) => {
+      .catch(err => {
         onFail?.(err);
       });
   } catch (error) {}

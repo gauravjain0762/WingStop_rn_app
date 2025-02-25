@@ -18,7 +18,7 @@ type Props = {
   type?: 'blue' | 'gray';
   disabled?: boolean;
   leftIcon?: any;
-  extraTextStyle: TextStyle;
+  extraTextStyle?: TextStyle;
   rightIcon?: any;
 };
 

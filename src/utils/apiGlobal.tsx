@@ -1,11 +1,12 @@
+/* eslint-disable curly */
 import axios from 'axios';
-import {asyncKeys, clearAsync, getAsyncToken} from './asyncStorage';
+import {clearAsync, getAsyncToken} from './asyncStorage';
 import {errorToast} from './commonFunction';
 import {dispatchAction} from '../redux/hooks';
 import {IS_LOADING} from '../redux/actionTypes';
-import {navigationRef} from '../navigation/mainNavigator';
 import {SCREENS} from '../navigation/screenNames';
 import {API} from './apiConstant';
+import {navigationRef} from '../navigation/RootContainer';
 
 interface makeAPIRequestProps {
   method?: any;
@@ -65,7 +66,7 @@ export const makeAPIRequest = ({
 
 export const setAuthorization = async (authToken: any) => {
   const token = await getAsyncToken();
-  if (authToken == '') {
+  if (authToken === '') {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   } else {
     axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
@@ -101,13 +102,13 @@ export const handleErrorRes = (
   dispatch: any,
   fun?: () => void,
 ) => {
-  if (err?.response?.status == 401) {
+  if (err?.response?.status === 401) {
     dispatchAction(dispatch, IS_LOADING, false);
     removeAuthorization();
-    // navigationRef.reset({
-    //   index: 0,
-    //   routes: [{ name: SCREENS.LoginScreen }],
-    // });
+    navigationRef.reset({
+      index: 0,
+      routes: [{name: SCREENS.LoginScreen}],
+    });
     errorToast('Please login again');
   } else {
     dispatchAction(dispatch, IS_LOADING, false);

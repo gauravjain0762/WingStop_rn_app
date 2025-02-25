@@ -32,8 +32,8 @@ const SearchScreen = () => {
             'Extra Sauces',
             'Drinks',
           ]?.map((item: any) => (
-            <TouchableOpacity style={styles.recents}>
-              <Image source={IMAGES.recent} style={styles.recent} />
+            <TouchableOpacity style={styles.recentView}>
+              <Image source={IMAGES.recent} style={styles.recentIcon} />
               <View>
                 <Text>{item}</Text>
               </View>
@@ -52,25 +52,25 @@ const styles = StyleSheet.create({
     marginTop: hp(32),
     borderTopWidth: 1,
     borderColor: colors._E1E1E180,
+    paddingHorizontal: wp(20),
   },
   label: {
-    paddingLeft: wp(21),
     paddingTop: hp(40),
     ...commonFontStyle('i_600', 22, colors.black),
   },
-  recent: {
+  recentIcon: {
     width: wp(19),
     height: wp(19),
   },
-  recents: {
+  recentView: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: wp(19),
+    gap: wp(10),
     borderRadius: 50,
     borderWidth: 1,
     borderColor: colors._E0E0E0,
     paddingVertical: hp(18),
-    paddingHorizontal: wp(24),
+    paddingHorizontal: wp(21),
   },
   list: {
     flexDirection: 'row',
@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     gap: wp(15),
     rowGap: hp(18),
-    paddingHorizontal: wp(21),
     marginTop: hp(34),
   },
 });

@@ -3,19 +3,17 @@ import {
   View,
   Text,
   TouchableOpacity,
-  FlatList,
   StyleSheet,
   Image,
   TextInput,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 import {IMAGES} from '../../assets/Images';
 import {useTranslation} from 'react-i18next';
 import {commonFontStyle, wp} from '../../theme/fonts';
 import {colors} from '../../theme/colors';
 import {AppStyles} from '../../theme/appStyles';
-import {navigationRef} from '../../navigation/RootContainer';
 import {SCREENS, SCREEN_NAMES} from '../../navigation/screenNames';
+import {goBack, navigateTo} from '../../utils/commonFunction';
 // import Icon from 'react-native-vector-icons/Feather';
 
 const categories = [
@@ -39,8 +37,8 @@ const CustomHeader = ({
   placeholder?: string;
   right?: ReactNode;
 }) => {
-  const navigation = useNavigation();
   const [selectedCategory, setSelectedCategory] = useState('1');
+
   const {t} = useTranslation();
 
   return (
@@ -48,9 +46,7 @@ const CustomHeader = ({
       {/* Back Button */}
       <View
         style={{flexDirection: 'row', alignItems: 'center', marginBottom: 10}}>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => navigation.goBack()}>
+        <TouchableOpacity style={styles.btn} onPress={() => goBack()}>
           <Image
             source={IMAGES.back}
             style={{
@@ -68,29 +64,38 @@ const CustomHeader = ({
           />
         ) : (
           <View style={styles.rightContainer}>
-            {isIcon && right ? (
+            {right ? (
               right
-            ) : isSetting ? (
-              <TouchableOpacity>
-                <Image source={IMAGES.setting} style={[styles.iconStyle3]} />
-              </TouchableOpacity>
             ) : (
               <>
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate(SCREEN_NAMES.Notification)
-                  }>
-                  <Image
-                    source={IMAGES.notification}
-                    style={[styles.iconStyle3, {marginRight: 15}]}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => {
-                    navigationRef.navigate(SCREENS.CartScreen);
-                  }}>
-                  <Image source={IMAGES.cardAdd} style={styles.iconStyle3} />
-                </TouchableOpacity>
+                {isSetting && (
+                  <TouchableOpacity>
+                    <Image
+                      source={IMAGES.setting}
+                      style={[styles.iconStyle3]}
+                    />
+                  </TouchableOpacity>
+                )}
+                {isIcon && (
+                  <>
+                    <TouchableOpacity
+                      onPress={() => navigateTo(SCREEN_NAMES.Notification)}>
+                      <Image
+                        source={IMAGES.notification}
+                        style={[styles.iconStyle3, {marginRight: 15}]}
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        navigateTo(SCREENS.CartScreen);
+                      }}>
+                      <Image
+                        source={IMAGES.cardAdd}
+                        style={styles.iconStyle3}
+                      />
+                    </TouchableOpacity>
+                  </>
+                )}
               </>
             )}
           </View>

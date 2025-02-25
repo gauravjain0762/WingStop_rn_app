@@ -6,33 +6,29 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
-import {useNavigation, useTheme} from '@react-navigation/native';
-import {ActionSheet} from '../../component';
-// import EditPicture from '../../component/common/EditPicture';
+import React from 'react';
 import {AppStyles} from '../../theme/appStyles';
 import {useTranslation} from 'react-i18next';
 import {useDispatch, useSelector} from 'react-redux';
-import {setLangauge} from '../../redux/service/AuthServices';
-import {successToast} from '../../utils/commonFunction';
+import {setLanguage} from '../../redux/service/AuthServices';
+import {navigateTo, successToast} from '../../utils/commonFunction';
 import {IMAGES} from '../../assets/Images';
 import {commonFontStyle} from '../../theme/fonts';
 import {colors} from '../../theme/colors';
 import {SCREENS} from '../../navigation/screenNames';
-import {navigationRef} from '../../navigation/RootContainer';
 
 type Props = {};
 
-const GetStarted = ({navigation}) => {
+const GetStarted: React.FC<Props> = ({}) => {
   const {t} = useTranslation();
   const dispatch = useDispatch();
-  const {language} = useSelector(state => state.common);
+  const {language} = useSelector((state: any) => state.common);
 
   const onPressLanguage = selectAr => {
     if (selectAr) {
-      dispatch(setLangauge('kn'));
+      dispatch(setLanguage('kn'));
     } else {
-      dispatch(setLangauge('en'));
+      dispatch(setLanguage('en'));
     }
     successToast(t('Language change successfully'));
   };
@@ -40,7 +36,7 @@ const GetStarted = ({navigation}) => {
   const onGetStarted = () => {
     // navigationRef.navigate(SCREENS.MyOrdersScreen);
     // navigation.navigate(SCREENS.HomeScreen);
-    navigation.navigate(SCREENS.SignUpScreen);
+    navigateTo(SCREENS.SignUpScreen);
   };
 
   return (
@@ -80,8 +76,7 @@ const GetStarted = ({navigation}) => {
         <Text style={styles.getStartedText}>{t('Get Started')}</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        onPress={() => navigation.navigate(SCREENS.LoginScreen)}>
+      <TouchableOpacity onPress={() => navigateTo(SCREENS.LoginScreen)}>
         <Text style={styles.signInText}>
           {t('Already have an account?')}{' '}
           <Text style={styles.signInLink}>{t('Sign In')}</Text>

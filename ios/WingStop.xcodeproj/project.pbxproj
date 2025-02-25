@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		050419422FA04302916B308E /* Gilroy-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB933D1D5DD7445EA547DA9A /* Gilroy-Light.ttf */; };
 		0A9E7FA60AF94AFE8A167768 /* Inter-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F90FF95C058045F48EA853DB /* Inter-ExtraBold.ttf */; };
-		0C80B921A6F3F58F76C31292 /* libPods-WingStop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-WingStop.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		216A5BBFB0454279AAC5B2E0 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C5E29BEE71B47D7B15F198F /* Inter-SemiBold.ttf */; };
 		41B0F9AA58A94C45A0058A07 /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 954B3E11F1C24D5D9F0B3AB7 /* Inter-Light.ttf */; };
@@ -23,6 +22,7 @@
 		A4D343A3887C4BECA20B18E5 /* Inter-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5672A3F2FCB645FAB164008B /* Inter-Black.ttf */; };
 		B20A58083D814E12A2F4FF87 /* Gilroy-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 955DC79AD87942B2A6933F14 /* Gilroy-ExtraBold.ttf */; };
 		B3ECE60AAFED47A09FE257AC /* Inter-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F8F21158BD244EBBA3E4385 /* Inter-ExtraLight.ttf */; };
+		C571D7AC9D9B0419C8F0A5C9 /* libPods-WingStop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C21287B503519090F512B2 /* libPods-WingStop.a */; };
 		DB10E68F020748B88CA0F9D5 /* Gilroy-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD630C0ECC04A8787F7D320 /* Gilroy-Bold.ttf */; };
 		DC37463814E24567B34BE2EF /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E9508C1513946FEAD0071AA /* Inter-Regular.ttf */; };
 		DD11AD11412F4EE2BB255099 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B053D7E8455447239BBC6681 /* Inter-Medium.ttf */; };
@@ -38,11 +38,8 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = WingStop/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = WingStop/Info.plist; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = WingStop/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		3B4392A12AC88292D35C810B /* Pods-WingStop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WingStop.debug.xcconfig"; path = "Target Support Files/Pods-WingStop/Pods-WingStop.debug.xcconfig"; sourceTree = "<group>"; };
 		3FD630C0ECC04A8787F7D320 /* Gilroy-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Gilroy-Bold.ttf"; path = "../src/assets/fonts/Gilroy-Bold.ttf"; sourceTree = "<group>"; };
 		5672A3F2FCB645FAB164008B /* Inter-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Black.ttf"; path = "../src/assets/fonts/Inter-Black.ttf"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-WingStop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WingStop.release.xcconfig"; path = "Target Support Files/Pods-WingStop/Pods-WingStop.release.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-WingStop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WingStop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F224C244DA6473B82A7B97A /* Gilroy-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Gilroy-Medium.ttf"; path = "../src/assets/fonts/Gilroy-Medium.ttf"; sourceTree = "<group>"; };
 		728C5504FE5C4C94ACC86F4C /* Inter-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Thin.ttf"; path = "../src/assets/fonts/Inter-Thin.ttf"; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = WingStop/AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +53,9 @@
 		A085038873EF4E65A8577B3A /* Gilroy-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Gilroy-Black.ttf"; path = "../src/assets/fonts/Gilroy-Black.ttf"; sourceTree = "<group>"; };
 		B053D7E8455447239BBC6681 /* Inter-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Medium.ttf"; path = "../src/assets/fonts/Inter-Medium.ttf"; sourceTree = "<group>"; };
 		CB24D43327A5404C82D3571A /* Gilroy-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Gilroy-Regular.ttf"; path = "../src/assets/fonts/Gilroy-Regular.ttf"; sourceTree = "<group>"; };
+		CDADC7BB90593C7EABBAB0D4 /* Pods-WingStop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WingStop.debug.xcconfig"; path = "Target Support Files/Pods-WingStop/Pods-WingStop.debug.xcconfig"; sourceTree = "<group>"; };
+		D9C21287B503519090F512B2 /* libPods-WingStop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WingStop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFA347079BD8EF9CC579223A /* Pods-WingStop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WingStop.release.xcconfig"; path = "Target Support Files/Pods-WingStop/Pods-WingStop.release.xcconfig"; sourceTree = "<group>"; };
 		EB933D1D5DD7445EA547DA9A /* Gilroy-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Gilroy-Light.ttf"; path = "../src/assets/fonts/Gilroy-Light.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F90FF95C058045F48EA853DB /* Inter-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-ExtraBold.ttf"; path = "../src/assets/fonts/Inter-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -66,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-WingStop.a in Frameworks */,
+				C571D7AC9D9B0419C8F0A5C9 /* libPods-WingStop.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-WingStop.a */,
+				D9C21287B503519090F512B2 /* libPods-WingStop.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -151,8 +151,8 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-WingStop.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-WingStop.release.xcconfig */,
+				CDADC7BB90593C7EABBAB0D4 /* Pods-WingStop.debug.xcconfig */,
+				DFA347079BD8EF9CC579223A /* Pods-WingStop.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -164,13 +164,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "WingStop" */;
 			buildPhases = (
-				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				2041657F4B12E7DC09ABDC08 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				28A7F1D85103652CE8006FE5 /* [CP] Embed Pods Frameworks */,
+				941957E027CD4853B482A69E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -259,24 +259,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WingStop/Pods-WingStop-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WingStop/Pods-WingStop-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WingStop/Pods-WingStop-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+		2041657F4B12E7DC09ABDC08 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -298,7 +281,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
+		28A7F1D85103652CE8006FE5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WingStop/Pods-WingStop-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WingStop/Pods-WingStop-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WingStop/Pods-WingStop-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		941957E027CD4853B482A69E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -331,7 +331,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-WingStop.debug.xcconfig */;
+			baseConfigurationReference = CDADC7BB90593C7EABBAB0D4 /* Pods-WingStop.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -360,7 +360,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-WingStop.release.xcconfig */;
+			baseConfigurationReference = DFA347079BD8EF9CC579223A /* Pods-WingStop.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {
   View,
@@ -7,32 +8,93 @@ import {
   StyleSheet,
   Image,
   SafeAreaView,
+  Platform,
 } from 'react-native';
 import {IMAGES} from '../../assets/Images';
 import {useTranslation} from 'react-i18next';
-import {useDispatch, useSelector} from 'react-redux';
 import {commonFontStyle, wp} from '../../theme/fonts';
 import {colors} from '../../theme/colors';
 import CustomButton from '../../component/common/CustomButton';
 import {SCREENS} from '../../navigation/screenNames';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {useAppDispatch, useAppSelector} from '../../redux/hooks';
+import {emailCheck, errorToast, navigateTo} from '../../utils/commonFunction';
+import {onLoginCall, onSendOTPCall} from '../../redux/service/AuthServices';
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({}) => {
   const {t} = useTranslation();
-  const dispatch = useDispatch();
-  const {language} = useSelector(state => state.common);
-  const [userID, setUserID] = useState('');
+  const dispatch = useAppDispatch();
+  const {language} = useAppSelector(state => state.common);
 
-  const handleLogin = () => {
-    console.log('Logging in with:', userID);
+  const [userID, setUserID] = useState('');
+  const [password, setPassword] = useState('');
+  const [isEmail, setIsEmail] = useState(false);
+
+  // Function to check if input is an email or mobile number
+  const handleInputChange = (text: string) => {
+    setUserID(text);
+    const numberRegex = /^\d+$/;
+
+    if (text.trim() === '') {
+      setIsEmail(false); // Reset to default when input is cleared
+    } else {
+      setIsEmail(!numberRegex.test(text));
+    }
+  };
+
+  const handleLoginWithEmail = () => {
+    if (!emailCheck(userID)) {
+      errorToast(t('Please enter a valid email'));
+    } else if (password === '') {
+      errorToast(t('Please enter password'));
+    } else {
+      const obj = {
+        data: {
+          email: userID.toLowerCase(),
+          password: password,
+          language: language,
+          deviceToken: 'AJSKH908791ALKS676892832iJAS',
+          deviceType: Platform.OS,
+        },
+        onSuccess: () => {},
+        onFailure: (res: any) => {
+          console.log('onFailure', res);
+        },
+      };
+      dispatch(onLoginCall(obj));
+    }
+  };
+
+  const handleLoginWithNumber = () => {
+    if (userID === '') {
+      errorToast(t('Please enter a mobile number or email'));
+    } else {
+      const obj = {
+        data: {
+          phone: userID,
+          language: language,
+        },
+        onSuccess: (res: any) => {
+          console.log('res', res);
+          navigateTo(SCREENS.VerificationScreen, {
+            user_id: res?.data?._id,
+            phone: userID,
+          });
+        },
+        onFailure: (res: any) => {
+          console.log('onFailure', res);
+        },
+      };
+      dispatch(onSendOTPCall(obj));
+    }
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView
-        keyboardShouldPersistTaps={'handled'}
+        keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
-        style={[{flex: 1, marginHorizontal: wp(20)}]}>
+        style={{flex: 1, marginHorizontal: wp(20)}}>
         {/* Logo */}
         <Image source={IMAGES.logo} style={styles.logo} />
 
@@ -43,13 +105,30 @@ const LoginScreen = ({navigation}) => {
           placeholder={t('Enter here...')}
           placeholderTextColor="#999"
           value={userID}
-          onChangeText={setUserID}
-          keyboardType="numeric"
+          onChangeText={handleInputChange}
+          keyboardType={isEmail ? 'email-address' : 'numeric'}
         />
 
-        {/* Login Button */}
+        {/* Conditional Rendering */}
+        {isEmail && (
+          <TextInput
+            style={styles.input}
+            placeholder={t('Enter Password')}
+            placeholderTextColor="#999"
+            secureTextEntry
+            value={password}
+            onChangeText={setPassword}
+          />
+        )}
+
         <CustomButton
-          onPress={handleLogin}
+          onPress={() => {
+            if (isEmail) {
+              handleLoginWithEmail();
+            } else {
+              handleLoginWithNumber();
+            }
+          }}
           title={t('Login')}
           extraStyle={{marginTop: 35}}
         />
@@ -69,9 +148,11 @@ const LoginScreen = ({navigation}) => {
             <Text style={styles.socialText}>{t('Sign in with Google')}</Text>
           </TouchableOpacity>
         </View>
+
+        {/* Sign Up Link */}
         <TouchableOpacity
           style={{alignSelf: 'center'}}
-          onPress={() => navigation.navigate(SCREENS.SignUpScreen)}>
+          onPress={() => navigateTo(SCREENS.SignUpScreen)}>
           <Text style={styles.signInText}>
             {t('Create a New account?')}{' '}
             <Text style={styles.signInLink}>{t('Sign up')}</Text>
@@ -85,7 +166,6 @@ const LoginScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: 'center',
     backgroundColor: colors.bgColor,
   },
   logo: {
@@ -112,19 +192,8 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 10,
     paddingHorizontal: 15,
+    marginBottom: 10,
     ...commonFontStyle('i_500', 16, colors.black),
-  },
-  loginButton: {
-    backgroundColor: colors.themeColor,
-    borderRadius: 10,
-    width: '100%',
-    alignItems: 'center',
-    height: 57,
-    justifyContent: 'center',
-    marginTop: 35,
-  },
-  loginText: {
-    ...commonFontStyle('i_500', 18, colors.white),
   },
   forgotPassword: {
     marginTop: 14,

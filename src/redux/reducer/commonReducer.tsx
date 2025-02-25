@@ -2,7 +2,7 @@ import {
   IS_LOADING,
   SET_APP_THEME,
   SET_FCM_TOKEN,
-  SET_LANGAUGE,
+  SET_LANGUAGE,
   USER_LOGOUT,
 } from '../actionTypes';
 
@@ -15,7 +15,7 @@ const initialState = {
 
 export default function (state = initialState, action: any) {
   switch (action.type) {
-    case SET_LANGAUGE: {
+    case SET_LANGUAGE: {
       return {...state, language: action.payload};
     }
     case IS_LOADING: {

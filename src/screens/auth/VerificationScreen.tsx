@@ -4,7 +4,6 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Alert,
   Image,
   SafeAreaView,
 } from 'react-native';
@@ -19,14 +18,23 @@ import {colors} from '../../theme/colors';
 import {IMAGES} from '../../assets/Images';
 import {commonFontStyle, wp} from '../../theme/fonts';
 import {useTranslation} from 'react-i18next';
-import {SCREENS} from '../../navigation/screenNames';
 import {AppStyles} from '../../theme/appStyles';
-// import Icon from 'react-native-vector-icons/Feather';
+import {errorToast, goBack, resetNavigation} from '../../utils/commonFunction';
+import {useAppDispatch} from '../../redux/hooks';
+import {onVerifyOTPCall} from '../../redux/service/AuthServices';
+import {SCREENS} from '../../navigation/screenNames';
+import CustomHeader from '../../component/common/CustomHeader';
 
 const CELL_COUNT = 4;
 
-const VerificationScreen = ({navigation}) => {
+interface Props {
+  route: any;
+}
+
+const VerificationScreen = ({route}: Props) => {
+  const {user_id, phone} = route?.params;
   const {t} = useTranslation();
+  const dispatch = useAppDispatch();
 
   const [code, setCode] = useState('');
   const ref = useBlurOnFulfill({value: code, cellCount: CELL_COUNT});
@@ -36,39 +44,33 @@ const VerificationScreen = ({navigation}) => {
   });
 
   const handleVerify = () => {
-    navigation.navigate(SCREENS.HomeScreen);
-    // if (code.length === 4) {
-    //   Alert.alert('Success', `Entered OTP: ${code}`);
-    //   // Implement verification logic
-    // } else {
-    //   Alert.alert('Error', 'Please enter a valid 4-digit code.');
-    // }
+    if (code === '') {
+      errorToast(t('Please enter OTP'));
+    } else {
+      const obj = {
+        data: {
+          otp: code,
+          user_id: user_id,
+        },
+        onSuccess: (res: any) => {
+          console.log('response', res);
+          resetNavigation(SCREENS.HomeScreen);
+        },
+        onFailure: (res: any) => {
+          console.log('response', res);
+        },
+      };
+      dispatch(onVerifyOTPCall(obj));
+    }
   };
 
   return (
     <SafeAreaView style={AppStyles.mainWhiteContainer}>
+      <CustomHeader title={t('Verification Code')} isIcon={false} />
       <KeyboardAwareScrollView contentContainerStyle={styles.container}>
-        {/* Back Button */}
-        <View style={styles.backButton}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Image
-              source={IMAGES.back}
-              style={{
-                width: 37,
-                height: 37,
-                elevation: 30,
-                borderWidth: 0.2,
-                borderRadius: 10,
-              }}
-            />
-          </TouchableOpacity>
-          <Text style={styles.backText}>{t('Verification Code')}</Text>
-        </View>
-
-        {/* Title and Phone Number */}
         <Text style={styles.title}>{t('Verification code sent')}</Text>
-        <Text style={styles.subtitle}>{t('Enter 6-digit code sent at')}</Text>
-        <Text style={styles.phoneNumber}>+961 254 2578 255</Text>
+        <Text style={styles.subtitle}>{t('Enter 4-digit code sent at')}</Text>
+        <Text style={styles.phoneNumber}>+{phone}</Text>
 
         {/* OTP Input Field */}
         <CodeField

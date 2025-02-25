@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {
   View,
@@ -7,22 +8,24 @@ import {
   StyleSheet,
   Image,
   SafeAreaView,
+  Platform,
 } from 'react-native';
 import {IMAGES} from '../../assets/Images';
 import {useTranslation} from 'react-i18next';
-import {useDispatch, useSelector} from 'react-redux';
 import {commonFontStyle, wp} from '../../theme/fonts';
 import {colors} from '../../theme/colors';
 import CustomButton from '../../component/common/CustomButton';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import CountryPicker from 'react-native-country-picker-modal';
 import {SCREENS} from '../../navigation/screenNames';
+import {emailCheck, errorToast, navigateTo} from '../../utils/commonFunction';
+import {onRegisterCall} from '../../redux/service/AuthServices';
+import {useAppDispatch, useAppSelector} from '../../redux/hooks';
 
-const SignUpScreen = ({navigation}) => {
+const SignUpScreen = ({}) => {
   const {t} = useTranslation();
-  const dispatch = useDispatch();
-  const {language} = useSelector(state => state.common);
-  const [userID, setUserID] = useState('');
+  const dispatch = useAppDispatch();
+  const {language} = useAppSelector(state => state.common);
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -40,10 +43,61 @@ const SignUpScreen = ({navigation}) => {
   });
   const [visible, setVisible] = useState(false);
   const handleLogin = () => {
-    navigation.navigate(SCREENS.VerificationScreen);
+    if (!fullName.trim()) {
+      errorToast(t('Enter a full name'));
+      return;
+    }
+    if (!email.trim()) {
+      errorToast(t('Enter a Email'));
+      return;
+    }
+    if (!emailCheck(email.toLocaleLowerCase())) {
+      errorToast(t('Enter a valid email'));
+      return;
+    }
+    if (!phone.trim()) {
+      errorToast(t('Enter a phone number'));
+      return;
+    }
+    if (phone.length < 9 || phone.length > 12) {
+      errorToast(t('Enter a valid phone number'));
+      return;
+    }
+    if (!age.trim()) {
+      errorToast(t('Enter a age'));
+      return;
+    }
+    if (!password.trim()) {
+      errorToast(t('Enter a password'));
+      return;
+    }
+    if (password.length < 6) {
+      errorToast(t('Password must be at least 6 characters'));
+      return;
+    }
+
+    const obj = {
+      data: {
+        name: fullName,
+        email: email.toLocaleLowerCase(),
+        phone: country.callingCode[0] + phone,
+        age: age,
+        password: password,
+        deviceType: Platform.OS,
+        deviceToken: '',
+        language: language,
+      },
+      onSuccess: (res: any) => {
+        navigateTo(SCREENS.VerificationScreen, {
+          user_id: res?.data?._id,
+          phone: country.callingCode[0] + phone,
+        });
+      },
+      onFailure: () => {},
+    };
+    dispatch(onRegisterCall(obj));
   };
 
-  console.log('Logging in with:', country);
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView
@@ -91,6 +145,7 @@ const SignUpScreen = ({navigation}) => {
             placeholder={t('Phone Number')}
             keyboardType="phone-pad"
             value={phone}
+            maxLength={9}
             onChangeText={setPhone}
           />
         </View>
@@ -134,7 +189,7 @@ const SignUpScreen = ({navigation}) => {
         </View>
         <TouchableOpacity
           style={{alignSelf: 'center'}}
-          onPress={() => navigation.navigate(SCREENS.LoginScreen)}>
+          onPress={() => navigateTo(SCREENS.LoginScreen)}>
           <Text style={styles.signInText}>
             {t('Already have an account?')}{' '}
             <Text style={styles.signInLink}>{t('Sign In')}</Text>
@@ -147,8 +202,8 @@ const SignUpScreen = ({navigation}) => {
             withFlag
             withFilter
             withCallingCode
-            onSelect={country => {
-              setCountry(country);
+            onSelect={(i: any) => {
+              setCountry(i);
               setVisible(false);
             }}
             onClose={() => setVisible(false)}
@@ -200,6 +255,7 @@ const styles = StyleSheet.create({
   },
   input1: {
     ...commonFontStyle('i_500', 16, colors.black),
+    flex: 1,
   },
   codeText: {
     ...commonFontStyle('i_500', 16, colors.black),

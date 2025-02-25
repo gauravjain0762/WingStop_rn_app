@@ -124,5 +124,16 @@
   "Open": "Open",
   "Notification": "Notification",
   "My Address": "My Address",
-  "Recent Searches": "Recent Searches"
+  "Recent Searches": "Recent Searches",
+  "Please enter a mobile number or email": "Please enter a mobile number or email",
+  "Please enter password": "Please enter password",
+  "Please enter a valid email": "Please enter a valid email",
+  "Enter a full name": "Enter a full name",
+  "Enter a Email": "Enter a Email",
+  "Enter a valid email": "Enter a valid email",
+  "Enter a phone number": "Enter a phone number",
+  "Enter a valid phone number": "Enter a valid phone number",
+  "Enter a age": "Enter a age",
+  "Enter a password": "Enter a password",
+  "Password must be at least 6 characters": "Password must be at least 6 characters"
 }
