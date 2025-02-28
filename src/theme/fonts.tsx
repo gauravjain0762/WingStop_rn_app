@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import {RFValue} from 'react-native-responsive-fontsize';
 
 export function getFontType(fontWeight: any) {

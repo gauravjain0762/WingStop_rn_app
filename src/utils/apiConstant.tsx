@@ -24,3 +24,6 @@ export const POST = 'POST';
 export const GET = 'GET';
 export const PATCH = 'PATCH';
 export const DELETE = 'DELETE';
+
+export const WEB_CLIENT_ID =
+  '146820459121-lcfvks98mqe3aiipd40q383ocfnsquv0.apps.googleusercontent.com';

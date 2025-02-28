@@ -18,13 +18,30 @@ import CustomButton from '../../component/common/CustomButton';
 import {SCREENS} from '../../navigation/screenNames';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
-import {emailCheck, errorToast, navigateTo} from '../../utils/commonFunction';
-import {onLoginCall, onSendOTPCall} from '../../redux/service/AuthServices';
+import {
+  emailCheck,
+  errorToast,
+  navigateTo,
+  resetNavigation,
+} from '../../utils/commonFunction';
+import {
+  onAppleSignInCall,
+  onGoogleSignInCall,
+  onLoginCall,
+  onSendOTPCall,
+} from '../../redux/service/AuthServices';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
+import {WEB_CLIENT_ID} from '../../utils/apiConstant';
+import appleAuth from '@invertase/react-native-apple-authentication';
+import {setAuthorization} from '../../utils/apiGlobal';
+import {setAsyncToken} from '../../utils/asyncStorage';
+import SocialLoginButton from '../../component/common/SocialLoginButton';
 
 const LoginScreen = ({}) => {
   const {t} = useTranslation();
   const dispatch = useAppDispatch();
-  const {language} = useAppSelector(state => state.common);
+  const {language, fcmToken} = useAppSelector(state => state.common);
 
   const [userID, setUserID] = useState('');
   const [password, setPassword] = useState('');
@@ -89,6 +106,107 @@ const LoginScreen = ({}) => {
     }
   };
 
+  const onGoogleButtonPress = async () => {
+    GoogleSignin.configure({webClientId: WEB_CLIENT_ID});
+    try {
+      await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+      const {data}: any = await GoogleSignin.signIn();
+      const googleCredential = auth.GoogleAuthProvider.credential(
+        data?.idToken,
+      );
+      await auth().signInWithCredential(googleCredential);
+      const {data: userInfo} = await GoogleSignin.signInSilently();
+
+      let obj = {
+        data: {
+          name: userInfo?.user.name,
+          email: userInfo?.user.email,
+          googleId: userInfo?.user?.id,
+          deviceToken: fcmToken,
+        },
+        onSuccess: async (res: any) => {
+          await setAuthorization(res?.data?.auth_token);
+          await setAsyncToken(res?.data?.auth_token);
+          resetNavigation(SCREENS.HomeScreen);
+        },
+        onFailure: (res: any) => {
+          // console.log('onFailure', res);
+          // if (res?.data?.phone_verified === false) {
+          //   navigateTo(SCREENS.EnterPhoneScreen, {
+          //     registerData: obj.data,
+          //     type: 'google',
+          //   });
+          // }
+        },
+      };
+      dispatch(onGoogleSignInCall(obj));
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+
+  const onAppleButtonPress = async () => {
+    // Start the sign-in request
+    const appleAuthRequestResponse = await appleAuth.performRequest({
+      requestedOperation: appleAuth.Operation.LOGIN,
+      requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+    });
+    // Ensure Apple returned a user identityToken
+    if (!appleAuthRequestResponse.identityToken) {
+      throw new Error('Apple Sign-In failed - no identify token returned');
+    }
+
+    // Create a Firebase credential from the response
+    const {identityToken, nonce} = appleAuthRequestResponse;
+    if (identityToken) {
+      const appleCredential = auth.AppleAuthProvider.credential(
+        identityToken,
+        nonce,
+      );
+
+      auth()
+        .signInWithCredential(appleCredential)
+        .then(async user => {
+          console.log('user', user);
+          var str: any = user.user.email;
+          str = str.split('@');
+          let data: any = {};
+          data.email = user.user.email;
+          data.name = str[0];
+          data.appleId = user.user.uid;
+          data.deviceToken = fcmToken;
+
+          let obj = {
+            data: data,
+            onSuccess: async (res: any) => {
+              await setAuthorization(res?.data?.auth_token);
+              await setAsyncToken(res?.data?.auth_token);
+              resetNavigation(SCREENS.HomeScreen);
+            },
+            onFailure: (res: any) => {
+              // console.log('onFailure', res);
+              // if (res?.data?.phone_verified === false) {
+              //   navigateTo(SCREENS.EnterPhoneScreen, {
+              //     registerData: obj.data,
+              //     type: 'google',
+              //   });
+              // }
+            },
+          };
+          dispatch(onAppleSignInCall(obj));
+
+          // navigateTo(SCREENS.EnterPhoneScreen, {
+          //   registerData: data,
+          //   type: 'apple',
+          // });
+        })
+        .catch(error => {
+          console.log('error', error);
+          // Something goes wrong
+        });
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView
@@ -138,15 +256,18 @@ const LoginScreen = ({}) => {
 
         {/* Social Login Buttons */}
         <View style={styles.socialContainer}>
-          <TouchableOpacity style={styles.socialButton}>
-            <Image source={IMAGES.apple} style={styles.imageStyle} />
-            <Text style={styles.socialText}>{t('Sign in with Apple')}</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.socialButton}>
-            <Image source={IMAGES.google} style={styles.imageStyle} />
-            <Text style={styles.socialText}>{t('Sign in with Google')}</Text>
-          </TouchableOpacity>
+          {Platform.OS === 'ios' && (
+            <SocialLoginButton
+              icon={IMAGES.apple}
+              title={t('Sign in with Apple')}
+              onPress={onAppleButtonPress}
+            />
+          )}
+          <SocialLoginButton
+            icon={IMAGES.google}
+            title={t('Sign in with Google')}
+            onPress={onGoogleButtonPress}
+          />
         </View>
 
         {/* Sign Up Link */}
@@ -202,25 +323,9 @@ const styles = StyleSheet.create({
   },
   socialContainer: {
     flexDirection: 'row',
-    marginTop: 20,
-    justifyContent: 'space-between',
-    marginBottom: 20,
-  },
-  socialButton: {
-    flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: colors.black,
-    borderRadius: 10,
-    marginHorizontal: 5,
-    marginTop: 26,
-    paddingVertical: 16,
-    flex: 1,
-    justifyContent: 'center',
-  },
-  socialText: {
-    marginLeft: 8,
-    ...commonFontStyle('i_500', 14, colors.black),
+    marginVertical: 20,
+    gap: 10,
   },
   signInText: {
     ...commonFontStyle('i_500', 18, colors.black),

@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import HomeScreen from '../screens/home/HomeScreen';
 import {SCREENS} from './screenNames';
 import LoginScreen from '../screens/auth/LoginScreen';
@@ -25,6 +25,12 @@ import PromotionScreen from '../screens/myOrders/PromotionScreen';
 import PromotionDetails from '../screens/myOrders/PromotionDetails';
 import {createStackNavigator} from '@react-navigation/stack';
 
+import messaging from '@react-native-firebase/messaging';
+import {firebase} from '@react-native-firebase/auth';
+import {SET_FCM_TOKEN} from '../redux/actionTypes';
+import {dispatchAction, useAppDispatch} from '../redux/hooks';
+import {PermissionsAndroid} from 'react-native';
+
 export type RootStackParamList = {
   HomeScreen: undefined;
 };
@@ -43,91 +49,96 @@ export type RootStackParamList = {
 const Stack = createStackNavigator();
 
 const StackNavigator: FC = () => {
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   messaging().setAutoInitEnabled(true);
-  //   setNotification();
-  // }, []);
-  // const setNotification = async () => {
-  //   let authStatus = await firebase.messaging().hasPermission();
+  useEffect(() => {
+    messaging().setAutoInitEnabled(true);
+    setNotification();
+  }, []);
 
-  //   if (authStatus !== firebase.messaging.AuthorizationStatus.AUTHORIZED) {
-  //     requestPermission();
-  //   }
+  const setNotification = async () => {
+    PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+    );
 
-  //   if (authStatus === firebase.messaging.AuthorizationStatus.AUTHORIZED) {
-  //     getToken();
-  //   }
-  // };
-  // const requestPermission = () => {
-  //   messaging()
-  //     .requestPermission({
-  //       alert: true,
-  //       announcement: false,
-  //       badge: true,
-  //       carPlay: true,
-  //       provisional: false,
-  //       sound: true,
-  //     })
-  //     .then(() => {
-  //       getToken();
-  //     })
-  //     .catch(error => {
-  //       console.log('error', error);
-  //     });
-  // };
-  // const getToken = async () => {
-  //   messaging()
-  //     .getToken()
-  //     .then(fcmToken => {
-  //       if (fcmToken) {
-  //         console.log('fcm--', fcmToken);
-  //         dispatchAction(dispatch, SET_FCM_TOKEN, fcmToken);
-  //       } else {
-  //         console.log('[FCMService] User does not have a device token');
-  //       }
-  //     })
-  //     .catch(error => {
-  //       let err = `FCm token get error${error}`;
-  //       console.log(err);
-  //     });
-  // };
-  //   const checkNotification = (remoteMessage: any) => {};
-  // useEffect(() => {
-  //   messaging().onNotificationOpenedApp(remoteMessage => {
-  //     if (remoteMessage) {
-  //       console.log(
-  //         'Notification caused app to open from background state:',
-  //         remoteMessage.notification,
-  //       );
-  //       checkNotification(remoteMessage);
-  //     }
-  //   });
-  //   // Check whether an initial notification is available
-  //   messaging()
-  //     .getInitialNotification()
-  //     .then(remoteMessage => {
-  //       console.log('getInitialNotification', remoteMessage);
-  //       if (remoteMessage) {
-  //         console.log(
-  //           'Notification caused app to open from quit state:',
-  //           remoteMessage.notification,
-  //         );
-  //       }
-  //       checkNotification(remoteMessage);
-  //     });
-  //   messaging().setBackgroundMessageHandler(async remoteMessage => {
-  //     console.log('Message handled in the background!', remoteMessage);
-  //     checkNotification(remoteMessage);
-  //   });
-  //   const unsubscribe = messaging().onMessage(async remoteMessage => {
-  //     console.log('A new FCM message arrived!', remoteMessage);
-  //     checkNotification(remoteMessage);
-  //     onDisplayNotification(remoteMessage);
-  //   });
-  //   return unsubscribe;
-  // }, []);
+    let authStatus = await firebase.messaging().hasPermission();
+
+    if (authStatus !== firebase.messaging.AuthorizationStatus.AUTHORIZED) {
+      requestPermission();
+    }
+
+    if (authStatus === firebase.messaging.AuthorizationStatus.AUTHORIZED) {
+      getToken();
+    }
+  };
+  const requestPermission = () => {
+    messaging()
+      .requestPermission({
+        alert: true,
+        announcement: false,
+        badge: true,
+        carPlay: true,
+        provisional: false,
+        sound: true,
+      })
+      .then(() => {
+        getToken();
+      })
+      .catch(error => {
+        console.log('error', error);
+      });
+  };
+  const getToken = async () => {
+    messaging()
+      .getToken()
+      .then(fcmToken => {
+        if (fcmToken) {
+          console.log('fcm--', fcmToken);
+          dispatchAction(dispatch, SET_FCM_TOKEN, fcmToken);
+        } else {
+          console.log('[FCMService] User does not have a device token');
+        }
+      })
+      .catch(error => {
+        let err = `FCm token get error${error}`;
+        console.log(err);
+      });
+  };
+  const checkNotification = (remoteMessage: any) => {};
+  useEffect(() => {
+    messaging().onNotificationOpenedApp(remoteMessage => {
+      if (remoteMessage) {
+        console.log(
+          'Notification caused app to open from background state:',
+          remoteMessage.notification,
+        );
+        checkNotification(remoteMessage);
+      }
+    });
+    // Check whether an initial notification is available
+    messaging()
+      .getInitialNotification()
+      .then(remoteMessage => {
+        console.log('getInitialNotification', remoteMessage);
+        if (remoteMessage) {
+          console.log(
+            'Notification caused app to open from quit state:',
+            remoteMessage.notification,
+          );
+        }
+        checkNotification(remoteMessage);
+      });
+    messaging().setBackgroundMessageHandler(async remoteMessage => {
+      console.log('Message handled in the background!', remoteMessage);
+      checkNotification(remoteMessage);
+    });
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      console.log('A new FCM message arrived!', remoteMessage);
+      checkNotification(remoteMessage);
+      // onDisplayNotification(remoteMessage);
+    });
+    return unsubscribe;
+  }, []);
   // async function onDisplayNotification(message: any) {
   //   // Request permissions (required for iOS)
   //   await notifee.requestPermission();
