@@ -16,6 +16,13 @@ interface makeAPIRequestProps {
   params?: any;
 }
 
+export interface requestProps {
+  data?: any;
+  params?: any;
+  onSuccess?: (res: any) => void;
+  request?: (res: any) => void;
+}
+
 export const makeAPIRequest = ({
   method,
   url,

@@ -20,6 +20,7 @@ export const SCREENS = {
   SearchScreen: 'SearchScreen',
   PromotionScreen: 'PromotionScreen',
   PromotionDetails: 'PromotionDetails',
+  SelectLocation: 'SelectLocation',
 };
 
 export interface ScreenNames {
@@ -44,6 +45,7 @@ export interface ScreenNames {
   SearchScreen: string;
   PromotionScreen: string;
   PromotionDetails: string;
+  SelectLocation: string;
 }
 
 export const SCREEN_NAMES: ScreenNames = {

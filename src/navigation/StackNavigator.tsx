@@ -30,6 +30,7 @@ import {firebase} from '@react-native-firebase/auth';
 import {SET_FCM_TOKEN} from '../redux/actionTypes';
 import {dispatchAction, useAppDispatch} from '../redux/hooks';
 import {PermissionsAndroid} from 'react-native';
+import SelectLocation from '../screens/Account/SelectLocation';
 
 export type RootStackParamList = {
   HomeScreen: undefined;
@@ -163,154 +164,48 @@ const StackNavigator: FC = () => {
   // }
 
   return (
-    <Stack.Navigator initialRouteName={SCREENS.SplashScreen}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      initialRouteName={SCREENS.SplashScreen}>
+      <Stack.Screen name={SCREENS.SplashScreen} component={Splash} />
+      <Stack.Screen name={SCREENS.GetStarted} component={GetStarted} />
+      <Stack.Screen name={SCREENS.LoginScreen} component={LoginScreen} />
+      <Stack.Screen name={SCREENS.SignUpScreen} component={SignUpScreen} />
       <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
-        name={SCREENS.SplashScreen}
-        component={Splash}
-      />
-      <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
-        name={SCREENS.GetStarted}
-        component={GetStarted}
-      />
-      <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
-        name={SCREENS.LoginScreen}
-        component={LoginScreen}
-      />
-      <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
-        name={SCREENS.SignUpScreen}
-        component={SignUpScreen}
-      />
-      <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
         name={SCREENS.VerificationScreen}
         component={VerificationScreen}
       />
+      <Stack.Screen name={SCREENS.HomeScreen} component={HomeScreen} />
+      <Stack.Screen name={SCREENS.ViewAllScreen} component={ViewAllScreen} />
       <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
-        name={SCREENS.HomeScreen}
-        component={HomeScreen}
-      />
-      <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
-        name={SCREENS.ViewAllScreen}
-        component={ViewAllScreen}
-      />
-      <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
         name={SCREENS.DetailsViewScreen}
         component={DetailsViewScreen}
       />
+      <Stack.Screen name={SCREENS.CartScreen} component={CartScreen} />
+      <Stack.Screen name={SCREENS.CheckoutScreen} component={CheckoutScreen} />
+      <Stack.Screen name={SCREENS.MyOrdersScreen} component={MyOrdersScreen} />
       <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
-        name={SCREENS.CartScreen}
-        component={CartScreen}
-      />
-      <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
-        name={SCREENS.CheckoutScreen}
-        component={CheckoutScreen}
-      />
-      <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
-        name={SCREENS.MyOrdersScreen}
-        component={MyOrdersScreen}
-      />
-      <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
         name={SCREENS.OrdersDetailScreen}
         component={OrdersDetailScreen}
       />
+      <Stack.Screen name={SCREENS.AccountScreen} component={AccountScreen} />
+      <Stack.Screen name={SCREENS.Profile} component={Profile} />
+      <Stack.Screen name={SCREENS.SelectOrder} component={SelectOrder} />
+      <Stack.Screen name={SCREENS.LoyalityScreen} component={LoyalityScreen} />
+      <Stack.Screen name={SCREENS.Notification} component={Notification} />
+      <Stack.Screen name={SCREENS.MyAddress} component={MyAddress} />
+      <Stack.Screen name={SCREENS.SearchScreen} component={SearchScreen} />
       <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
-        name={SCREENS.AccountScreen}
-        component={AccountScreen}
-      />
-      <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
-        name={SCREENS.Profile}
-        component={Profile}
-      />
-      <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
-        name={SCREENS.SelectOrder}
-        component={SelectOrder}
-      />
-      <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
-        name={SCREENS.LoyalityScreen}
-        component={LoyalityScreen}
-      />
-      <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
-        name={SCREENS.Notification}
-        component={Notification}
-      />
-      <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
-        name={SCREENS.MyAddress}
-        component={MyAddress}
-      />
-      <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
-        name={SCREENS.SearchScreen}
-        component={SearchScreen}
-      />
-      <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
         name={SCREENS.PromotionScreen}
         component={PromotionScreen}
       />
       <Stack.Screen
-        options={({}) => ({
-          headerShown: false,
-        })}
         name={SCREENS.PromotionDetails}
         component={PromotionDetails}
       />
+      <Stack.Screen name={SCREENS.SelectLocation} component={SelectLocation} />
     </Stack.Navigator>
   );
 };

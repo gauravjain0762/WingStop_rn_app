@@ -25,7 +25,7 @@ import {useAppDispatch, useAppSelector} from '../../redux/hooks';
 const SignUpScreen = ({}) => {
   const {t} = useTranslation();
   const dispatch = useAppDispatch();
-  const {language} = useAppSelector(state => state.common);
+  const {language, fcmToken} = useAppSelector(state => state.common);
 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -84,7 +84,7 @@ const SignUpScreen = ({}) => {
         age: age,
         password: password,
         deviceType: Platform.OS,
-        deviceToken: '',
+        deviceToken: fcmToken,
         language: language,
       },
       onSuccess: (res: any) => {

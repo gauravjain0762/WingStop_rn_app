@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-native/no-inline-styles */
 import {
   View,
   Text,
@@ -9,15 +11,16 @@ import {
   SafeAreaView,
   ImageBackground,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {IMAGES} from '../../assets/Images';
 import {colors} from '../../theme/colors';
 import {AppStyles} from '../../theme/appStyles';
 import {commonFontStyle, SCREEN_WIDTH, wp} from '../../theme/fonts';
 import {useTranslation} from 'react-i18next';
-import {navigationRef} from '../../navigation/RootContainer';
 import {SCREENS, SCREEN_NAMES} from '../../navigation/screenNames';
 import {navigateTo} from '../../utils/commonFunction';
+import {useAppDispatch} from '../../redux/hooks';
+import {onGetDashboard} from '../../redux/service/HomeServices';
 
 type Props = {};
 
@@ -30,7 +33,7 @@ const specialOffers = [
   },
 ];
 
-const CustomTabBar = ({navigation, selectedTab, setSelectedTab}) => {
+const CustomTabBar = ({setSelectedTab}: any) => {
   return (
     <View style={styles.tabMain}>
       <TouchableOpacity onPress={() => setSelectedTab('Home')}>
@@ -38,21 +41,21 @@ const CustomTabBar = ({navigation, selectedTab, setSelectedTab}) => {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          navigationRef.navigate(SCREENS.MyOrdersScreen);
+          navigateTo(SCREENS.MyOrdersScreen);
           setSelectedTab('Cart');
         }}>
         <Image source={IMAGES.list} style={[styles.iconTab]} />
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          navigationRef.navigate(SCREENS.CartScreen);
+          navigateTo(SCREENS.CartScreen);
           setSelectedTab('Profile');
         }}>
         <Image source={IMAGES.addCart} style={[styles.iconTab]} />
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          navigationRef.navigate(SCREENS.AccountScreen);
+          navigateTo(SCREENS.AccountScreen);
           setSelectedTab('Profile');
         }}>
         <Image source={IMAGES.usetTab} style={[styles.iconTab]} />
@@ -61,22 +64,31 @@ const CustomTabBar = ({navigation, selectedTab, setSelectedTab}) => {
   );
 };
 
-const HomeScreen = (props: Props) => {
+const HomeScreen = ({}: Props) => {
   const {t} = useTranslation();
 
+  const dispatch = useAppDispatch();
   const [isDelivery, setIsDelivery] = useState(true);
   const [selectedTab, setSelectedTab] = useState('Home');
+  const [categories, setCategories] = useState([]);
+  const [bannerList, setBannerList] = useState([]);
 
-  const categories = [
-    {name: t('Promotions'), image: IMAGES.Promotions},
-    {name: t('Burgers'), image: IMAGES.Burgers},
-    {name: t('Individual Meal'), image: IMAGES.Individual},
-    {name: t('Group Meals'), image: IMAGES.GroupMeals},
-    {name: t('House Party'), image: IMAGES.HouseParty},
-    {name: t('Kids Meal Combo'), image: IMAGES.KidsMeal},
-    {name: t('Platter'), image: IMAGES.Platter},
-    {name: t('Sides'), image: IMAGES.Sides},
-  ];
+  useEffect(() => {
+    getDashboard();
+  }, []);
+
+  const getDashboard = () => {
+    let obj = {
+      onSuccess: (_res: any) => {
+        const cat = _res?.data?.categories;
+        const banner = _res?.data?.banners;
+        setBannerList(banner);
+        setCategories(cat);
+      },
+      onFailure: (_res: any) => {},
+    };
+    dispatch(onGetDashboard(obj));
+  };
 
   return (
     <SafeAreaView style={[AppStyles.mainWhiteContainer]}>
@@ -153,7 +165,20 @@ const HomeScreen = (props: Props) => {
 
       <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
         {/* Banner */}
-        <Image source={IMAGES.banner} style={styles.bannerStyle} />
+
+        <FlatList
+          data={bannerList}
+          contentContainerStyle={styles.bannerContainer}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          renderItem={({item, index}: any) => (
+            <Image
+              source={{uri: item?.image}}
+              style={styles.bannerStyle}
+              key={index}
+            />
+          )}
+        />
         <View style={{top: -10}}>
           <ImageBackground
             source={IMAGES.bg1}
@@ -180,7 +205,7 @@ const HomeScreen = (props: Props) => {
             </View>
             <TouchableOpacity
               onPress={() => {
-                navigationRef.navigate(SCREENS.ViewAllScreen);
+                navigateTo(SCREENS.ViewAllScreen);
               }}
               style={styles.headerRight}>
               <Text style={styles.title1}>{t('View All')}</Text>
@@ -191,22 +216,24 @@ const HomeScreen = (props: Props) => {
           <FlatList
             data={categories}
             numColumns={4}
-            keyExtractor={item => item.name}
+            keyExtractor={(item: any) => item._id}
             contentContainerStyle={styles.listContainer}
             columnWrapperStyle={styles.columnWrapper}
-            renderItem={({item}) => (
+            renderItem={({item}: any) => (
               <View style={styles.categoryItem}>
                 <View style={styles.outerBox}>
                   <View style={styles.innerBox}>
-                    <Image source={item.image} style={styles.categoryImage} />
+                    <Image
+                      source={{uri: item?.image}}
+                      style={styles.categoryImage}
+                    />
                   </View>
                 </View>
-                <Text style={styles.categoryText}>{item.name}</Text>
+                <Text style={styles.categoryText}>{item?.title}</Text>
               </View>
             )}
           />
         </View>
-
         {/* Special Offers */}
         <View style={[AppStyles.mainSide, {top: -30}]}>
           <Text style={[styles.title, {marginVertical: 20}]}>
@@ -360,12 +387,18 @@ const styles = StyleSheet.create({
     marginLeft: 7,
     ...commonFontStyle('i_500', 16, colors.white),
   },
+  bannerContainer: {
+    flexGrow: 1,
+    gap: 20,
+    paddingHorizontal: 20,
+  },
   bannerStyle: {
-    width: '92%',
+    width: SCREEN_WIDTH / 1.2,
     height: 170,
     borderRadius: 30,
-    resizeMode: 'contain',
+    resizeMode: 'stretch',
     alignSelf: 'center',
+    overflow: 'hidden',
   },
 
   container: {marginTop: 8},
@@ -428,8 +461,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   categoryImage: {
-    width: 55,
-    height: 55,
+    width: 60,
+    height: 60,
     resizeMode: 'contain',
   },
   categoryText: {

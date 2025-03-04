@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
   btnContainer: {
     backgroundColor: colors.themeColor,
     borderRadius: 10,
-    width: '100%',
     alignItems: 'center',
     height: 57,
     justifyContent: 'center',

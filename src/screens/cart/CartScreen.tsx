@@ -20,6 +20,7 @@ import {IMAGES} from '../../assets/Images';
 import {AppStyles} from '../../theme/appStyles';
 import {useTranslation} from 'react-i18next';
 import {SCREENS} from '../../navigation/screenNames';
+import CustomHeader from '../../component/common/CustomHeader';
 
 const CartScreen = () => {
   const {t} = useTranslation();
@@ -58,22 +59,8 @@ const CartScreen = () => {
   };
 
   return (
-    <SafeAreaView style={[AppStyles.flex]}>
-      <StatusBar barStyle={'dark-content'} backgroundColor={colors.white} />
-      {/* Header */}
-      <View style={[styles.header, AppStyles.mainSide]}>
-        <TouchableOpacity onPress={() => navigationRef.goBack()}>
-          <Image
-            source={IMAGES.back1}
-            style={{
-              width: 30,
-              height: 30,
-            }}
-          />
-        </TouchableOpacity>
-        <Text style={styles.headerText}>{t('Cart')}</Text>
-      </View>
-
+    <SafeAreaView style={[AppStyles.mainWhiteContainer]}>
+      <CustomHeader title={t('Cart')} isIcon={false} />
       {/* Toggle Buttons */}
       <View style={[styles.toggleContainer, {marginHorizontal: wp(20)}]}>
         <TouchableOpacity

@@ -5,6 +5,7 @@ export const asyncKeys = {
   token: '@token',
   user_info: '@user_info',
   language: '@language',
+  location: '@location',
 };
 
 export const clearAsync = async () => {
@@ -28,6 +29,10 @@ export const setAsyncUserInfo = async (user: any) => {
   await AsyncStorage.setItem(asyncKeys.user_info, JSON.stringify(user));
 };
 
+export const setAsyncLocation = async (location: any) => {
+  await AsyncStorage.setItem(asyncKeys.location, JSON.stringify(location));
+};
+
 export const getAsyncUserInfo = async () => {
   const userInfo = await AsyncStorage.getItem(asyncKeys.user_info);
   if (userInfo) {
@@ -39,7 +44,7 @@ export const getAsyncUserInfo = async () => {
 
 // LANGUAGE
 
-export const setAsyncLanguage = async value => {
+export const setAsyncLanguage = async (value: any) => {
   await AsyncStorage.setItem(asyncKeys.language, JSON.stringify(value));
 };
 

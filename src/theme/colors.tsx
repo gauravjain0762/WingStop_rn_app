@@ -46,6 +46,7 @@ export const colors = {
   _797878: '#797878',
   _D79424: '#D79424',
   _5D5D5D: '#5D5D5D',
+  _7A7A7A: '#7A7A7A',
 };
 
 export const darkThemeColors = {

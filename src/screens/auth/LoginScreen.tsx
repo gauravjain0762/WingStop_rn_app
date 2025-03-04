@@ -70,7 +70,7 @@ const LoginScreen = ({}) => {
           email: userID.toLowerCase(),
           password: password,
           language: language,
-          deviceToken: 'AJSKH908791ALKS676892832iJAS',
+          deviceToken: fcmToken,
           deviceType: Platform.OS,
         },
         onSuccess: () => {},
@@ -92,7 +92,6 @@ const LoginScreen = ({}) => {
           language: language,
         },
         onSuccess: (res: any) => {
-          console.log('res', res);
           navigateTo(SCREENS.VerificationScreen, {
             user_id: res?.data?._id,
             phone: userID,
@@ -123,21 +122,14 @@ const LoginScreen = ({}) => {
           email: userInfo?.user.email,
           googleId: userInfo?.user?.id,
           deviceToken: fcmToken,
+          deviceType: Platform.OS,
         },
         onSuccess: async (res: any) => {
           await setAuthorization(res?.data?.auth_token);
           await setAsyncToken(res?.data?.auth_token);
           resetNavigation(SCREENS.HomeScreen);
         },
-        onFailure: (res: any) => {
-          // console.log('onFailure', res);
-          // if (res?.data?.phone_verified === false) {
-          //   navigateTo(SCREENS.EnterPhoneScreen, {
-          //     registerData: obj.data,
-          //     type: 'google',
-          //   });
-          // }
-        },
+        onFailure: (_res: any) => {},
       };
       dispatch(onGoogleSignInCall(obj));
     } catch (error: any) {
@@ -183,22 +175,9 @@ const LoginScreen = ({}) => {
               await setAsyncToken(res?.data?.auth_token);
               resetNavigation(SCREENS.HomeScreen);
             },
-            onFailure: (res: any) => {
-              // console.log('onFailure', res);
-              // if (res?.data?.phone_verified === false) {
-              //   navigateTo(SCREENS.EnterPhoneScreen, {
-              //     registerData: obj.data,
-              //     type: 'google',
-              //   });
-              // }
-            },
+            onFailure: (_res: any) => {},
           };
           dispatch(onAppleSignInCall(obj));
-
-          // navigateTo(SCREENS.EnterPhoneScreen, {
-          //   registerData: data,
-          //   type: 'apple',
-          // });
         })
         .catch(error => {
           console.log('error', error);

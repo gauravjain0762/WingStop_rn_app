@@ -4,8 +4,8 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Image,
   SafeAreaView,
+  Platform,
 } from 'react-native';
 import {
   CodeField,
@@ -15,12 +15,11 @@ import {
 } from 'react-native-confirmation-code-field';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {colors} from '../../theme/colors';
-import {IMAGES} from '../../assets/Images';
 import {commonFontStyle, wp} from '../../theme/fonts';
 import {useTranslation} from 'react-i18next';
 import {AppStyles} from '../../theme/appStyles';
-import {errorToast, goBack, resetNavigation} from '../../utils/commonFunction';
-import {useAppDispatch} from '../../redux/hooks';
+import {errorToast, resetNavigation} from '../../utils/commonFunction';
+import {useAppDispatch, useAppSelector} from '../../redux/hooks';
 import {onVerifyOTPCall} from '../../redux/service/AuthServices';
 import {SCREENS} from '../../navigation/screenNames';
 import CustomHeader from '../../component/common/CustomHeader';
@@ -35,6 +34,7 @@ const VerificationScreen = ({route}: Props) => {
   const {user_id, phone} = route?.params;
   const {t} = useTranslation();
   const dispatch = useAppDispatch();
+  const {fcmToken} = useAppSelector(state => state.common);
 
   const [code, setCode] = useState('');
   const ref = useBlurOnFulfill({value: code, cellCount: CELL_COUNT});
@@ -51,6 +51,8 @@ const VerificationScreen = ({route}: Props) => {
         data: {
           otp: code,
           user_id: user_id,
+          deviceToken: fcmToken,
+          deviceType: Platform.OS,
         },
         onSuccess: (res: any) => {
           console.log('response', res);

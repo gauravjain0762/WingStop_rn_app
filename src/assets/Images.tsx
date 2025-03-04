@@ -100,4 +100,8 @@ export const IMAGES = {
   promotion3: require('./Icons/promotion3.png'),
   check: require('./Icons/check.png'),
   copy: require('./Icons/copy.png'),
+
+  work: require('./Icons/work.png'),
+  frd_home: require('./Icons/frd_home.png'),
+  hospital: require('./Icons/hospital.png'),
 };
